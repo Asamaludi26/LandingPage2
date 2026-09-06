@@ -196,9 +196,9 @@ export const Header: React.FC<HeaderProps> = ({ onOpenReservation }) => {
     return (
       <motion.div variants={navMenuChild}>
         <div className="flex items-baseline justify-between gap-6 mb-7">
-          <h4 className="font-serif text-xl text-[#1A1A1A]">
+          <p className="font-serif text-xl text-[#1A1A1A]">
             Jelajahi <span className="italic text-[#5A5A40]">{openLink.label}</span>
-          </h4>
+          </p>
           <div className="flex items-center gap-6">
             {openLink.menuSubtitle && (
               <p className="text-xs text-[#6B6B5F] font-light text-right max-w-md hidden sm:block">
@@ -448,6 +448,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenReservation }) => {
 
           {/* Desktop Nav Links with Elegant Dropdown Menus */}
           <nav
+            aria-label="Navigasi utama"
             onMouseLeave={scheduleClose}
             className="hidden lg:flex items-center gap-0.5 xl:gap-1 text-[11px] uppercase tracking-[0.18em] font-semibold text-[#6B6B5F] relative py-1"
           >

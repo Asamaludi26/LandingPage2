@@ -92,7 +92,7 @@ export const ProductsPage: React.FC = () => {
                   <div className="w-10 h-10 border border-[#E5E3DF] bg-white flex items-center justify-center mb-4">
                     <Icon className="w-5 h-5 text-[#5A5A40]" />
                   </div>
-                  <h4 className="font-serif text-lg font-normal text-[#1A1A1A] mb-2">{adv.title}</h4>
+                  <h3 className="font-serif text-lg font-normal text-[#1A1A1A] mb-2">{adv.title}</h3>
                   <p className="text-xs text-[#6B6B5F] font-light leading-relaxed">{adv.desc}</p>
                 </Reveal>
               );

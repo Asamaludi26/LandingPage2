@@ -35,7 +35,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
           {/* Text Column */}
           <div className="lg:col-span-7">
             <Reveal direction="fade" duration={0.5}>
-              <nav className="flex items-center gap-2.5 text-[10px] uppercase tracking-[0.25em] font-bold text-[#8C8276] mb-7">
+              <nav aria-label="Breadcrumb" className="flex items-center gap-2.5 text-[10px] uppercase tracking-[0.25em] font-bold text-[#8C8276] mb-7">
                 <Link to="/" className="hover:text-[#1A1A1A] transition-colors">
                   {PAGE_HERO.breadcrumbHome}
                 </Link>

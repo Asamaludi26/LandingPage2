@@ -8,6 +8,7 @@ import { SHOWROOMS_DATA } from '../../content';
 import { useSmoothScroll } from '../../lib/useLenis';
 import { useScrollLock } from '../../lib/useScrollLock';
 import { scrollToTop, setSectionHash, smoothScrollTo } from '../../lib/scroll';
+import { useRouteSeo } from '../../lib/useSeo';
 import { WaLimitToast } from '../ui/WaLimitToast';
 
 interface PageActions {
@@ -29,6 +30,8 @@ export const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
 
   const location = useLocation();
   const navigate = useNavigate();
+
+  useRouteSeo(location);
 
   const [isReservationOpen, setIsReservationOpen] = useState(false);
 

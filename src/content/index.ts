@@ -9,3 +9,4 @@ export * from './about';
 export * from './collections';
 export * from './productDetail';
 export * from './services';
+export * from './seo';

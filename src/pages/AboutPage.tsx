@@ -160,7 +160,7 @@ export const AboutPage: React.FC = () => {
                     {milestone.year}
                   </span>
                   <div className="w-8 h-[1px] bg-[#3A3A3A] my-4" />
-                  <h4 className="font-serif text-base text-[#F9F8F6] mb-2">{milestone.title}</h4>
+                  <h3 className="font-serif text-base text-[#F9F8F6] mb-2">{milestone.title}</h3>
                   <p className="text-xs text-[#9C9A92] font-light leading-relaxed">{milestone.desc}</p>
                 </div>
               </Reveal>
@@ -277,7 +277,7 @@ export const AboutPage: React.FC = () => {
                     <div className="w-11 h-11 border border-[#E5E3DF] bg-[#F9F8F6] flex items-center justify-center mb-5">
                       <Icon className="w-5 h-5 text-[#5A5A40]" />
                     </div>
-                    <h4 className="font-serif text-lg font-normal text-[#1A1A1A] mb-3 pr-8">{proc.title}</h4>
+                    <h3 className="font-serif text-lg font-normal text-[#1A1A1A] mb-3 pr-8">{proc.title}</h3>
                     <p className="text-xs text-[#6B6B5F] font-light leading-relaxed">{proc.desc}</p>
                   </motion.div>
                 </Reveal>
@@ -447,7 +447,7 @@ export const AboutPage: React.FC = () => {
                     <div className="w-10 h-10 border border-[#E5E3DF] bg-white flex items-center justify-center mb-5">
                       <Icon className="w-4 h-4 text-[#5A5A40]" />
                     </div>
-                    <h4 className="font-serif text-lg font-normal text-[#1A1A1A] mb-3">{pillar.title}</h4>
+                    <h3 className="font-serif text-lg font-normal text-[#1A1A1A] mb-3">{pillar.title}</h3>
                     <p className="text-xs text-[#6B6B5F] font-light leading-relaxed">
                       {pillar.desc}
                     </p>

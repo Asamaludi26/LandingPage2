@@ -268,9 +268,9 @@ export const ServicesPage: React.FC = () => {
                   <div className="w-11 h-11 border border-[#E5E3DF] bg-white flex items-center justify-center mb-5">
                     <service.icon className="w-5 h-5 text-[#5A5A40]" />
                   </div>
-                  <h4 className="font-serif text-lg font-normal text-[#1A1A1A] mb-3 leading-snug">
+                  <h3 className="font-serif text-lg font-normal text-[#1A1A1A] mb-3 leading-snug">
                     {service.title}
-                  </h4>
+                  </h3>
                   <p className="text-[#6B6B5F] text-xs font-light leading-relaxed mb-5">
                     {service.desc}
                   </p>
@@ -349,9 +349,9 @@ export const ServicesPage: React.FC = () => {
                     <div className="w-10 h-10 border border-[#E5E3DF] bg-[#F9F8F6] flex items-center justify-center mb-4">
                       <item.icon className="w-4 h-4 text-[#5A5A40]" />
                     </div>
-                    <h4 className="font-serif text-lg font-normal text-[#1A1A1A] mb-2">
+                    <h3 className="font-serif text-lg font-normal text-[#1A1A1A] mb-2">
                       {item.title}
-                    </h4>
+                    </h3>
                     <p className="text-xs text-[#6B6B5F] font-light leading-relaxed">
                       {item.desc}
                     </p>
