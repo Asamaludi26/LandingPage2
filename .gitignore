@@ -1,0 +1,50 @@
+# === Dependencies & Build ===
+node_modules/
+dist/
+build/
+out/
+coverage/
+*.tsbuildinfo
+.vite/
+
+# === Environment & Secrets ===
+.env
+.env.*
+!.env.example
+*.local
+
+# === Logs & OS ===
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Editor / IDE ===
+.vscode/
+.idea/
+*.swp
+*.sublime-*
+
+# === AI Tooling (data intelejen buatan / agent instructions) ===
+# Dipisahkan eksplisit agar tidak ada data/conversation/kredensial AI yang ter-push.
+.ai/
+.claude/
+.cursor/
+.opencode/
+.openaicode/
+.windsurf/
+copilot/
+.prompts/
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+OPENCODE.md
+COPILOT.md
+opencode.json
+opencode.jsonc
+.cursorrules
+.git/ai/

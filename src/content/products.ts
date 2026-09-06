@@ -1,0 +1,241 @@
+export interface Product {
+  id: string;
+  category: string;
+  name: string;
+  subtitle: string;
+  description: string;
+  image: string;
+  galleryImages: string[];
+  tags: string[];
+  materials: string[];
+  features: string[];
+  popularFor: string;
+  specs: { label: string; value: string }[];
+}
+
+export const PRODUCT_CATEGORIES = [
+  { id: 'all', label: 'Semua Produk' },
+  { id: 'gorden', label: 'Gorden & Vitrase' },
+  { id: 'blinds', label: 'Blinds & Window Shades' },
+  { id: 'kain', label: 'Kain Upholstery & Sofa' },
+  { id: 'wallpaper', label: 'Wallpaper & Wallcovering' },
+  { id: 'furniture', label: 'Custom Furniture' },
+  { id: 'flooring', label: 'Lantai Parquet & Karpet' },
+];
+
+export const PRODUCTS_DATA: Product[] = [
+  {
+    id: 'gorden-ripple-fold-belgian-sheer',
+    category: 'gorden',
+    name: 'Gorden Ripple Fold & Vitrase Sheer Linen',
+    subtitle: 'Sistem Gelombang Presisi dengan Jatuh Kain Mewah Flawless',
+    description: 'Drapery elegan bergaya arsitektural modern dengan gelombang konsisten dari plafon hingga lantai. Menggunakan perpaduan Belgian linen sheer tembus cahaya alami serta kain blackout velvet lembut untuk privasi maksimal.',
+    image: '/assets/unsplash-1513694203232-719a280e022f.jpg',
+    galleryImages: [
+      '/assets/unsplash-1600585154340-be6161a56a0c.jpg',
+      '/assets/unsplash-1616486338812-3dadae4b4ace.jpg',
+      '/assets/unsplash-1615873968403-89e068629265.jpg',
+      '/assets/unsplash-1598928506311-c55ded91a20c.jpg',
+    ],
+    tags: ['Best Seller', 'Motorized Compatible', 'Custom Made'],
+    materials: ['Belgian Sheer Linen', 'Heavy European Velvet', 'Somfy Motorized Track / Manual S-Fold'],
+    features: ['Gelombang rapi simetris', 'Insulasi suara & panas hingga 70%', 'Kompatibel dengan smart home'],
+    popularFor: 'Ruang Tamu High Ceiling, Master Bedroom, Void Hunian Mewah',
+    specs: [
+      { label: 'Sistem Pemasangan', value: 'Ripple Fold S-Fold pada rel aluminum premium' },
+      { label: 'Opsi Motorisasi', value: 'Somfy / Dooya — remote, aplikasi, smart home' },
+      { label: 'Karakter Kain', value: 'Sheer tembus cahaya + lapisan blackout velvet' },
+      { label: 'Estimasi Pengerjaan', value: '7–14 hari kerja' },
+      { label: 'Garansi', value: '1–5 tahun rel & mekanisme' },
+    ],
+  },
+  {
+    id: 'gorden-french-pleat-damask',
+    category: 'gorden',
+    name: 'Gorden French Pleat Klasik Eksklusif',
+    subtitle: 'Lipatan Tradisional Tiga Titik dengan Jahitan Tangan Master',
+    description: 'Pilihan abadi untuk hunian bergaya klasik modern atau kolonial elegan. Dibuat dengan jahitan tangan presisi pada lipatan atas untuk memastikan jatuhan tirai tetap kencang, tebal, dan bernuansa megah.',
+    image: '/assets/unsplash-1616486338812-3dadae4b4ace.jpg',
+    galleryImages: [
+      '/assets/unsplash-1513694203232-719a280e022f.jpg',
+      '/assets/unsplash-1600585154340-be6161a56a0c.jpg',
+      '/assets/unsplash-1600566753376-12c8ab7fb75b.jpg',
+    ],
+    tags: ['Classic Luxury', 'Handcrafted', 'Blackout 100%'],
+    materials: ['Silk Brocade & Jacquard', 'Cotton Thermal Lining', 'Brass Rod & Finial Custom'],
+    features: ['Lapisan ganda anti pudar matahari', 'Jahitan kelim tersembunyi (blind-stitch)', 'Koleksi rumbai & tie-back antik'],
+    popularFor: 'Ruang Makan Formal, Living Room Megah, Kedutaan & Istana',
+    specs: [
+      { label: 'Teknik Lipatan', value: 'French Pleat tiga titik dengan jahitan tangan' },
+      { label: 'Tinggi Maksimal', value: 'Hingga 6 meter tanpa sambungan' },
+      { label: 'Lining', value: 'Cotton thermal + interlining blackout penuh' },
+      { label: 'Aksesori', value: 'Brass rod custom dengan finial pilihan' },
+      { label: 'Estimasi Pengerjaan', value: '10–14 hari kerja' },
+    ],
+  },
+  {
+    id: 'blinds-motorized-wooden-blinds',
+    category: 'blinds',
+    name: 'Motorized Wooden Venetian Blinds',
+    subtitle: 'Kayu Basswood Asli dengan Kontrol Kemiringan Cahaya Presisi',
+    description: 'Krei kayu natural premium berukuran slat 50mm yang memberikan kesan hangat, maskulin, dan bersih. Dilengkapi dengan opsi remote motorized terintegrasi atau tarikan pita kain klasik.',
+    image: '/assets/unsplash-1618221195710-dd6b41faaea6.jpg',
+    galleryImages: [
+      '/assets/unsplash-1600210492486-724fe5c67fb0.jpg',
+      '/assets/unsplash-1600607687939-ce8a6c25118c.jpg',
+      '/assets/unsplash-1613490493576-7fde63acd811.jpg',
+    ],
+    tags: ['Natural Timber', 'Motorized', 'UV Protection'],
+    materials: ['Kiln-Dried Natural Basswood', 'UV Polyurethane Coating', 'Aluminium Headrail Heavy Duty'],
+    features: ['Tahan lembap & tidak mudah melengkung', 'Pilihan 18 warna urat kayu alami', 'Pengaturan sudut cahaya sangat presisi'],
+    popularFor: 'Ruang Kerja Pribadi, Penthouse Study, Dapur Kering & Walk-in Closet',
+    specs: [
+      { label: 'Material Slat', value: 'Basswood kiln-dried alami, lebar 50mm' },
+      { label: 'Finish', value: '18 varian urat kayu + matte UV coating' },
+      { label: 'Kontrol', value: 'Remote motorized / tarikan pita kain manual' },
+      { label: 'Lebar Maksimal', value: 'Hingga 6 meter per jendela' },
+      { label: 'Estimasi Pengerjaan', value: '7–12 hari kerja' },
+    ],
+  },
+  {
+    id: 'blinds-silhouette-shangrila',
+    category: 'blinds',
+    name: 'Silhouette & Shangri-La Window Shades',
+    subtitle: 'Perpaduan Lembutnya Kain Sheer dan Fleksibilitas Louver',
+    description: 'Inovasi window covering yang memadukan keindahan vitrase tipis dengan bilah kain horizontal di tengahnya. Menghadirkan pendaran cahaya alami yang sangat lembut tanpa silau.',
+    image: '/assets/unsplash-1600210492486-724fe5c67fb0.jpg',
+    galleryImages: [
+      '/assets/unsplash-1513694203232-719a280e022f.jpg',
+      '/assets/unsplash-1600607687939-ce8a6c25118c.jpg',
+      '/assets/unsplash-1616486338812-3dadae4b4ace.jpg',
+    ],
+    tags: ['Ultra Modern', 'Soft Glow', 'Minimalist'],
+    materials: ['High-Performance Microfiber', 'Anti-Dust Coating', 'Dual Sheer Fabric Facings'],
+    features: ['Menyaring 88% sinar UV yang merusak furnitur', 'Operasi senyap dan mulus', 'Tampilan bersih tanpa tali berserakan'],
+    popularFor: 'Apartemen Modern, Kamar Anak, Ruang Keluarga Kontemporer',
+    specs: [
+      { label: 'Bahan Kain', value: 'High-performance microfiber + anti-dust coating' },
+      { label: 'Filter Cahaya', value: 'Menyaring 88% UV tanpa silau' },
+      { label: 'Sistem Operasi', value: 'Tali tersembunyi, pergerakan senyap' },
+      { label: 'Opsi Motorisasi', value: 'Kompatibel Somfy & Dooya' },
+      { label: 'Estimasi Pengerjaan', value: '7–12 hari kerja' },
+    ],
+  },
+  {
+    id: 'kain-boucle-textured-upholstery',
+    category: 'kain',
+    name: 'Kain Upholstery Textured Bouclé & Chenille',
+    subtitle: 'Sensasi Tekstur Lembut, Hangat, dan Berseni Tinggi',
+    description: 'Koleksi kain pelapis kursi dan sofa favorit desainer interior internasional. Menghadirkan tekstur loop berkarakter yang sangat mewah saat disentuh, tahan abrasi tinggi, dan mudah dibersihkan.',
+    image: '/assets/unsplash-1555041469-a586c61ea9bc.jpg',
+    galleryImages: [
+      '/assets/unsplash-1590381105924-c72589b9ef3f.jpg',
+      '/assets/unsplash-1586023492125-27b2c045efd7.jpg',
+    ],
+    tags: ['Trending Texture', 'High Durability', 'Import Quality'],
+    materials: ['Virgin Wool & Performance Blend', 'Martindale > 60.000 Rubs', 'Stain-Resistant Nano Treatment'],
+    features: ['Ramah anak & hewan peliharaan', 'Warna netral organik (Oatmeal, Terracotta, Alabaster)', 'Sangat lembut untuk sofa santai'],
+    popularFor: 'Sofa Lengkung Modern, Accent Armchair, Padded Ottoman',
+    specs: [
+      { label: 'Komposisi', value: 'Virgin wool & performance blend' },
+      { label: 'Ketahanan Abrasi', value: 'Martindale > 60.000 rubs' },
+      { label: 'Perawatan', value: 'Nano stain-resistant, mudah dibersihkan' },
+      { label: 'Penjualan', value: 'Custom per meter / per roll' },
+      { label: 'Pilihan Warna', value: '40+ warna netral organik' },
+    ],
+  },
+  {
+    id: 'kain-italian-aniline-leather',
+    category: 'kain',
+    name: 'Kulit Asli Italian Full Grain & Aniline',
+    subtitle: 'Keindahan Alami Kulit Italia dengan Patina Abadi',
+    description: 'Bahan pelapis kulit asli pilihan dari penyamakan kulit terbaik di Vicenza, Italia. Menampilkan pori-pori alami yang bernapas, aroma khas kulit mewah, dan semakin menawan seiring berjalannya usia.',
+    image: '/assets/unsplash-1586023492125-27b2c045efd7.jpg',
+    galleryImages: [
+      '/assets/unsplash-1590381105924-c72589b9ef3f.jpg',
+      '/assets/unsplash-1616486338812-3dadae4b4ace.jpg',
+    ],
+    tags: ['Genuine Leather', 'Italian Craft', 'Timeless Investment'],
+    materials: ['100% Full-Grain European Bovine', 'Vegetable Tanned Option', 'Wax Pull-up Finish'],
+    features: ['Fleksibel, tidak panas saat diduduki', 'Memiliki corak alami unik di tiap lembar', 'Awet hingga puluhan tahun'],
+    popularFor: 'Sofa Chesterfield, Kursi Kerja Direktur, Recliner Mewah',
+    specs: [
+      { label: 'Jenis Kulit', value: 'Full-grain bovine Eropa (Vicenza, Italia)' },
+      { label: 'Alternatif Eco', value: 'Vegetable tanned / wax pull-up finish' },
+      { label: 'Karakter', value: 'Bernapas, fleksibel, patina makin mewah' },
+      { label: 'Pemesanan', value: 'Custom sesuai ukuran sofa atau kursi' },
+      { label: 'Estimasi Pengerjaan', value: '14–21 hari kerja' },
+    ],
+  },
+  {
+    id: 'wallpaper-textured-silk-wallcovering',
+    category: 'wallpaper',
+    name: 'Exclusive Silk & Textured Fabric Wallcovering',
+    subtitle: 'Pelapis Dinding Bertekstur Mewah dengan Pendar Cahaya Sutra',
+    description: 'Bukan sekadar kertas dinding biasa, melainkan wallcovering tekstil anyaman sutra, linen, dan serat tumbuhan alami yang dipasang rapi tanpa sambungan terlihat. Memberikan dimensi dan kedalaman pada dinding hunian.',
+    image: '/assets/unsplash-1618219908412-a29a1bb7b86e.jpg',
+    galleryImages: [
+      '/assets/unsplash-1613490493576-7fde63acd811.jpg',
+      '/assets/unsplash-1600585154340-be6161a56a0c.jpg',
+      '/assets/unsplash-1581858726788-75bc0f6a952d.jpg',
+    ],
+    tags: ['Seamless Look', 'Acoustic Comfort', 'Eco-Friendly'],
+    materials: ['Natural Silk & Sisal Grasscloth', 'Non-Woven Breathable Backing', 'Fire Retardant Class A'],
+    features: ['Meredam pantulan gema ruangan', 'Bebas VOC dan tidak berbau tajam', 'Tampilan mewah di bawah pencahayaan hangat'],
+    popularFor: 'Dinding Foyer Utama, Backdrop Master Bed, Powder Room, Home Theater',
+    specs: [
+      { label: 'Bahan', value: 'Sutra alami, linen, dan sisal grasscloth' },
+      { label: 'Pemasangan', value: 'Seamless tanpa sambungan terlihat' },
+      { label: 'Standar Keamanan', value: 'Fire retardant Class A, bebas VOC' },
+      { label: 'Performa Akustik', value: 'Meredam gema dan pantulan suara' },
+      { label: 'Penjualan', value: 'Custom per meter persegi dinding' },
+    ],
+  },
+  {
+    id: 'furniture-bespoke-curved-sofa',
+    category: 'furniture',
+    name: 'Bespoke Custom Curved Sofa & Credenza',
+    subtitle: 'Furnitur Dibuat Khusus Sesuai Proporsi dan Sudut Ruang Anda',
+    description: 'Kami memproduksi sofa custom, kursi makan, dan headboard tempat tidur dengan rangka kayu solid oven (kayu jati/mahoni) dan busa densitas tinggi HR yang tidak mudah kempes, dilapisi kain pilihan Anda.',
+    image: '/assets/unsplash-1555041469-a586c61ea9bc.jpg',
+    galleryImages: [
+      '/assets/unsplash-1590381105924-c72589b9ef3f.jpg',
+      '/assets/unsplash-1586023492125-27b2c045efd7.jpg',
+    ],
+    tags: ['Custom Dimensions', 'Solid Wood Frame', 'Lifetime Wood Warranty'],
+    materials: ['Kiln-Dried Solid Teak & Mahogany', 'High-Resilience Feather-Down Layer', 'Spring Suspension Steel'],
+    features: ['Ukuran, kedalaman, dan keempukan sesuai permintaan', 'Bisa memilih kombinasi kain & piping detail', 'Pengerjaan rangka presisi'],
+    popularFor: 'Living Room Mewah, Ruang Keluarga Luas, Villa Tropis',
+    specs: [
+      { label: 'Rangka', value: 'Jati/mahoni kiln-dried + spring suspension steel' },
+      { label: 'Busa', value: 'HR high-resilience + lapisan feather-down' },
+      { label: 'Kustomisasi', value: 'Ukuran, kedalaman, keempukan, kain, piping' },
+      { label: 'Garansi Rangka', value: 'Lifetime wood warranty' },
+      { label: 'Estimasi Pengerjaan', value: '14–21 hari kerja' },
+    ],
+  },
+  {
+    id: 'flooring-engineered-herringbone',
+    category: 'flooring',
+    name: 'Lantai Kayu Parquet Herringbone & Karpet Wool',
+    subtitle: 'Kemewahan Pijakan Lantai dengan Estetika Hangat Alami',
+    description: 'Pilihan lantai kayu engineered oak bermotif herringbone atau chevron bergaya mansion Eropa, serta karpet custom hand-tufted dari serat wol New Zealand untuk kenyamanan kaki tanpa tanding.',
+    image: '/assets/unsplash-1581858726788-75bc0f6a952d.jpg',
+    galleryImages: [
+      '/assets/unsplash-1613490493576-7fde63acd811.jpg',
+      '/assets/unsplash-1600585152220-90363fe7e115.jpg',
+      '/assets/unsplash-1618221195710-dd6b41faaea6.jpg',
+    ],
+    tags: ['European Oak', 'Hand-Tufted Wool', 'Underfloor Safe'],
+    materials: ['Engineered European White Oak', '100% New Zealand Virgin Wool', 'Matte UV Lacquer Protection'],
+    features: ['Tahan goresan dan anti rayap', 'Permukaan hangat dan tidak licin', 'Desain karpet bisa disesuaikan warna interior'],
+    popularFor: 'Kamar Tidur Utama, Ruang Tamu Mewah, Walk-in Closet Penthouse',
+    specs: [
+      { label: 'Material', value: 'Engineered European White Oak' },
+      { label: 'Pola', value: 'Herringbone / chevron / plank custom' },
+      { label: 'Lapisan', value: 'Matte UV lacquer anti gores & anti rayap' },
+      { label: 'Karpet', value: 'Hand-tufted 100% NZ wool, warna custom' },
+      { label: 'Kompatibilitas', value: 'Underfloor heating safe' },
+    ],
+  },
+];
