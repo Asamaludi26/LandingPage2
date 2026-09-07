@@ -46,7 +46,7 @@ Utility custom paling dikenal cuma `no-scrollbar`. Lebar kontainer dan skala hea
 
 ## Tentang SEO
 
-Ada sebagian infrastruktur SEO yang gampang dilupakan: `SITE_URL` di `src/content/seo.ts` adalah satu-satunya sumber domain, nilainya `https://www.nusaatelier.com`. Semua canonical dan JSON-LD ikut nilai itu, jadi jangan menulis domain mentah di tempat lain. Dari nilai itu juga, `src/lib/useSeo.ts` mengatur title, description, canonical, OG/Twitter, dan injeksi JSON-LD per halaman. Dipanggil otomatis oleh PageLayout.
+Ada sebagian infrastruktur SEO yang gampang dilupakan: `SITE_URL` di `src/content/seo.ts` adalah satu-satunya sumber domain untuk SEO dinamis, nilainya `https://www.nusaatelier.com`. Semua canonical dan JSON-LD dinamis ikut nilai itu. URL mentah di luar itu cuma ada di `index.html` (baseline statis) — kalau domain berubah, sinkronkan dua-duanya. Dari nilai itu juga, `src/lib/useSeo.ts` mengatur title, description, canonical, OG/Twitter, dan injeksi JSON-LD per halaman. Dipanggil otomatis oleh PageLayout.
 
 File `public/robots.txt` dan `public/sitemap.xml` mengikuti. Kalau ada halaman atau produk baru, tambahkan URL-nya ke sitemap.
 

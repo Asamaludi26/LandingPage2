@@ -10,6 +10,7 @@ Idenya sederhana: semua konten sumbernya satu, folder `src/content/`. Edit file 
 | :--- | :--- |
 | Header, topbar, menu, footer, kontak, jam, sosmed | `src/content/layout.ts` |
 | Teks & data section beranda (Hero, About, Koleksi, End-to-End, Showroom, Testimoni, FAQ, CTA) | `src/content/sections.ts` |
+| Langkah proses End-to-End (Konsultasi → Survei → Pengerjaan → Instalasi) | `src/content/workflow.ts` |
 | Halaman Koleksi (/koleksi-produk) — hero & keunggulan | `src/content/collections.ts` |
 | Grid produk & kategori (9 produk + 6 kategori) | `src/content/products.ts` |
 | Detail tambahan per produk | `src/content/productDetail.ts` |

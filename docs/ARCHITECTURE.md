@@ -94,7 +94,7 @@ src/content/**  ->  komponen (Page/Section/Modal)  ->  render DOM
 
 Data diimpor langsung dari `src/content/index.ts`, tidak ada lapisan server. Tiap entitas punya tipe (Product, Showroom, Section, dan seterusnya); kalau menambah field di data, tipe ikut diperbarui.
 
-Detail produk (`/koleksi-produk/:productId`) mencari data pakai `product.id` di `PRODUCTS_DATA`. Jadi id produk adalah syarat mutlak dan harus unik.
+Detail produk (`/koleksi-produk/:productId`) mencari data pakai `product.id` di `PRODUCTS_DATA`. Jadi id produk adalah syarat mutlak dan harus unik. Kalau id-nya tidak ditemukan, halaman dialihkan ke `/koleksi-produk` (bukan beranda).
 
 ## Navigasi
 
@@ -131,11 +131,11 @@ SEO jalan di tiga lapis:
 2. Hook `useRouteSeo(location)` membaca metadata dari `src/content/seo.ts` per halaman, mengganti title/description/OG/twitter/canonical, lalu menyuntik JSON-LD dinamis ke elemen `#seo-route-jsonld`. Untuk halaman detail produk, meta mengikuti data produk (`productRouteMeta(product)`), jadi tidak perlu diedit manual.
 3. `robots.txt` dan `sitemap.xml` sebagai pelengkap. Sitemap ditulis manual, jangan lupa ditambah tiap ada halaman atau produk baru.
 
-Yang perlu diingat: `SITE_URL` di `seo.ts` satu-satunya sumber domain. Jangan hardcode URL di luar file itu.
+Yang perlu diingat: `SITE_URL` di `seo.ts` satu-satunya sumber domain untuk SEO dinamis. Satu-satunya URL mentah di luar itu ada di `index.html` (canonical, OG, dan JSON-LD Organization) yang jadi baseline statis — kalau domain berubah, dua-duanya ikut diganti.
 
 ## Modal reservasi
 
-ShowroomReservationModal dirender oleh PageLayout dan dibuka lewat konteks `usePageActions()` (fungsi `openReservation`), dipakai dari kartu showroom, CTA, header, maupun footer. Modal memformat tanggal, waktu, dan ringkasan data, lalu menyusun pesan ke WhatsApp lewat `wa.ts`. Saat modal terbuka, body di-kunci scroll-nya (`useScrollLock`), dan perilaku tambahannya diatur `useModalBehaviour`.
+ShowroomReservationModal dirender oleh PageLayout dan dibuka lewat konteks `usePageActions()` (fungsi `openReservation`), dipakai dari CTA (`CTABand`), header, footer, dan berbagai halaman. Khusus kartu showroom, `ShowroomsSection` merender instance modal sendiri dengan state lokal supaya lokasinya selalu mengikuti showroom yang diketuk. Modal memformat tanggal, waktu, dan ringkasan data, lalu menyusun pesan ke WhatsApp lewat `wa.ts`. Saat modal terbuka, body di-kunci scroll-nya (`useScrollLock`), dan perilaku tambahannya diatur `useModalBehaviour`.
 
 Jangan pindahkan logika form ke luar modal kecuali benar-benar perlu. Satu sumber kebenaran tetap `wa.ts`.
 
@@ -181,7 +181,7 @@ Beberapa aturan:
 - TypeScript strict, `npm run lint` harus nol error.
 - Nama file komponen PascalCase, lib/hook camelCase.
 - Data diimpor lewat `src/content/index.ts`.
-- Tidak ada `console.log` di kode produksi (kecuali memang sengaja di `wa.ts` untuk debug).
+- Tidak ada `console.log` / `debugger` di kode produksi (sudah dicek nol).
 - Nomor telepon/WA muncul lewat helper `wa.ts`, bukan ditulis mentah.
 
 Lanjutkan ke PANDUAN-DEVELOPMENT.md untuk langkah menambah halaman, section, atau produk.

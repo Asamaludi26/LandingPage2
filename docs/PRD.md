@@ -24,15 +24,15 @@ Definisi "End-to-End" di sini: semua kebutuhan furnitur dari gorden sampai parke
 
 ## Fitur yang ada
 
-**Beranda.** Hero dengan headline, subheadline, dan tombol WhatsApp. Setelah hero langsung section Tentang (tetap di beranda). Terus Koleksi Produk dengan filter kategori, End-to-End, kartu Showroom, Testimoni, dan FAQ. Pelan-pelan, satu alur.
+**Beranda.** Hero dengan headline, subheadline, tombol konsultasi via WhatsApp (tombol utama), dan tombol eksplorasi katalog (sekunder). Setelah hero langsung section Tentang (tetap di beranda). Terus Koleksi Produk dengan filter kategori, End-to-End, kartu Showroom, Testimoni, dan FAQ. Pelan-pelan, satu alur.
 
-**Koleksi & filter.** Grid produk dengan menu kategori (Semua plus 6 kategori). Saat kategori dipilih, grid ikut menyaring dan halaman scroll pelan ke grid produk. Semua kartu produk punya tombol WhatsApp.
+**Koleksi & filter.** Grid produk dengan menu kategori (Semua plus 6 kategori). Saat kategori dipilih, grid ikut menyaring dan halaman scroll pelan ke grid produk. Kartu produk tidak membuka WhatsApp langsung — pintunya lewat tombol "Reservasi Kunjungan" yang membuka modal, dan modal itu yang diakhiri membuka WhatsApp.
 
 **Halaman dalam.** Ada empat: Tentang (`/tentang-kami`), Koleksi (`/koleksi-produk`), Detail produk (`/koleksi-produk/:productId`), dan Layanan (`/layanan`). Halaman Tentang menyisipkan narasi perusahaan dengan timeline dari 1992 sampai sekarang, cerita workshop, standar kualitas, divisi grosir, dan pilar brand. Halaman detail produk: galeri, box info, deskripsi, spesifikasi, dan tombol WhatsApp.
 
-**Reservasi showroom.** Dari kartu Showroom ada tombol buka modal. Isinya nama, WhatsApp, email, tanggal, pilihan lokasi (Showroom Senopati / Studio Menteng), dan catatan bebas. Tombol kirim membuka WhatsApp dengan ringkasan data yang sudah diformat rapi. Kalau WhatsApp gagal kebuka (limit/izin), ada jalan alternatif: isi ulang form, telepon showroom, atau email. Kasus ini jarang terjadi, tapi disiapkan.
+**Reservasi showroom.** Dari kartu Showroom ada tombol buka modal. Isinya nama lengkap, nomor WhatsApp, tanggal, dan waktu kunjungan (09.00–17.30 WIB, tiap 30 menit). Lokasi tidak dipilih manual; dia mengikuti showroom dari mana tombolnya diketuk. Alurnya dua tahap: tombol "Konfirmasi & Siapkan Chat" menampilkan preview pesan WhatsApp, lalu "Kirim Reservasi via WhatsApp" membuka WhatsApp dengan ringkasan data yang sudah diformat rapi. Ada proteksi: jeda 3 detik antar klik dan maksimal 5 buka per sesi. Kalau klik tertahan, muncul toast "Batas Chat WhatsApp" yang mengarahkan pengunjung menghubungi langsung di nomor yang sama; dari layar ringkasan bisa balik lewat "Edit Data". Kasus ini jarang terjadi, tapi disiapkan.
 
-**WhatsApp concierge.** Tombol WhatsApp ada di header, di mayoritas section, di tiap produk, dan di halaman detail. Semuanya ngarah ke satu nomor: `62812-3456-7890` (cek: ini placeholder). Kode menyimpan nomor dalam bentuk teracak agar crawler tidak gampang menelusuri; filenya `src/lib/wa.ts`. Saat nomor asli siap, ganti di situ aja.
+**WhatsApp concierge.** Tombol WhatsApp langsung ada di header (topbar + tombol mengambang), hero, halaman detail produk, halaman layanan, testimoni, dan FAQ. Di kartu produk dan kartu showroom pintunya lewat tombol "Reservasi Kunjungan" yang bermuara ke WhatsApp. Semuanya ngarah ke satu nomor: `62812-3456-7890` (cek: ini placeholder). Kode menyimpan nomor dalam bentuk teracak agar crawler tidak gampang menelusuri; filenya `src/lib/wa.ts`. Saat nomor asli siap, ganti di situ aja.
 
 ## Hal non-fungsional
 
@@ -44,7 +44,7 @@ Definisi "End-to-End" di sini: semua kebutuhan furnitur dari gorden sampai parke
 
 ## Ukur keberhasilan
 
-Patokannya satu: pesan WhatsApp. Yang dipantau: klik tombol WA dari mana saja (filter, kartu, halaman detail, header, showroom, FAQ), pesan yang benar-benar terkirim, dan spamming kolom nama.
+Patokannya satu: pesan WhatsApp. Yang dipantau: klik tombol yang bermuara ke WA dari mana saja (kartu, halaman detail, header, showroom, FAQ), pesan yang benar-benar terkirim, dan spamming kolom nama.
 
 Sisi teknis: LCP di bawah 2,5 detik, CLS di bawah 0,1, ukuran bundle gzip di bawah 170 KB (perkiraan). Angka ini realistis karena SPA + Tailwind v4 memang ringan tanpa mengubah pengalaman pengguna.
 

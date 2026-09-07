@@ -15,7 +15,7 @@ Jadi jangan membagikan nomor-nomor itu sebagai kontak resmi. Nanti bisa diganti 
 
 ## Identitas
 
-- Nama brand: **Nusa Atelier**. Slogan yang dipakai: "Nusa Atelier, Karya Kami, Ketenangan Anda." Slogan lama "Karya Angkasa, Ketenangan Anda" tidak dipakai lagi.
+- Nama brand: **Nusa Atelier**. Slogan yang dicanangkan: "Nusa Atelier, Karya Kami, Ketenangan Anda." Catatan: slogan ini belum muncul di website (perlu ditetapkan tim sebelum rilis). Slogan lama "Karya Angkasa, Ketenangan Anda" tidak dipakai lagi.
 - Nama resmi: PT Nusa Atelier.
 - Monogram di favicon: **NA**.
 - Email: `info@nusaatelier.com`
@@ -53,7 +53,7 @@ Perhatian: data produk tidak menyimpan harga. Semua harga disepakati lewat Whats
 - Wallcovering / wallpaper tekstil.
 - Furniture custom (sofa, kursi, headboard) dengan rangka kayu solid.
 - Lantai parquet & karpet wool.
-- Binis grosir kain untuk toko dan desainer, plus kolaborasi arsitek (B2B).
+- Bisnis grosir kain untuk toko dan desainer, plus kolaborasi arsitek (B2B).
 
 Semua layanan diarahkan lewat WhatsApp. Survei dan pengukuran on-site gratis di area Jabodetabek.
 
@@ -68,7 +68,7 @@ Kunjungan ke dua-duanya bisa dijadwalkan lewat reservasi di website. Sekadar mel
 
 ## Bagaimana WhatsApp bekerja
 
-Semua tombol di website memakai satu nomor placeholder yang sama. Format pesan yang dibentuk sistem diawali konteks, misalnya "Halo Nusa Atelier, saya tertarik konsultasi interior..." atau "Saya ingin reservasi kunjungan...". Ada proteksi kecil: jeda 3 detik antar klik dan maksimal 5 kali buka WhatsApp per sesi pengunjung, biar tidak spam. Setelah itu pengunjung diarahkan ke pilihan telepon atau email. Kalau butuh detail teknis, ada di `src/lib/wa.ts`.
+Semua tombol di website memakai satu nomor placeholder yang sama. Format pesan yang dibentuk sistem diawali konteks, misalnya "Halo Nusa Atelier, saya tertarik konsultasi interior..." atau "Saya ingin reservasi kunjungan...". Ada proteksi kecil: jeda 3 detik antar klik dan maksimal 5 kali buka WhatsApp per sesi pengunjung, biar tidak spam. Setelah itu pengunjung diarahkan menghubungi langsung di nomor yang sama lewat toast (nilai tampilannya `WA_DISPLAY`), bukan telepon atau email. Kalau butuh detail teknis, ada di `src/lib/wa.ts`.
 
 ## Kesimpulan
 
