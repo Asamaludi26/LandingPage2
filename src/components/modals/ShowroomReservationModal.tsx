@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, CheckCircle2, MapPin, ArrowLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Showroom } from '../../content';
+import { Showroom, SHOWROOMS_DATA } from '../../content';
 import { LUXURY_EASE, microButton } from '../../lib/animations';
 import { useModalBehaviour } from '../../lib/useModalBehaviour';
 import { useScrollLock } from '../../lib/useScrollLock';
@@ -60,6 +60,7 @@ export const ShowroomReservationModal: React.FC<ShowroomReservationModalProps> =
   const [visitTime, setVisitTime] = useState(TIME_SLOTS[0]);
   const [confirmed, setConfirmed] = useState(false);
   const [website, setWebsite] = useState('');
+  const [selectedShowroom, setSelectedShowroom] = useState<Showroom>(showroom);
 
   const formStartRef = useRef<number | null>(null);
 
@@ -75,8 +76,9 @@ export const ShowroomReservationModal: React.FC<ShowroomReservationModalProps> =
       setVisitTime(TIME_SLOTS[0]);
       setConfirmed(false);
       setWebsite('');
+      setSelectedShowroom(showroom);
     }
-  }, [isOpen]);
+  }, [isOpen, showroom]);
 
   useEffect(() => {
     if (!confirmed) formStartRef.current = Date.now();
@@ -91,8 +93,8 @@ export const ShowroomReservationModal: React.FC<ShowroomReservationModalProps> =
   const detailRows = [
     { label: 'Nama', value: name },
     { label: 'No. WA', value: phone ? `+62 ${formatPhoneID(phone)}` : phone },
-    { label: 'Showroom', value: showroom.name },
-    { label: 'Alamat', value: showroom.address },
+    { label: 'Showroom', value: selectedShowroom.name },
+    { label: 'Alamat', value: selectedShowroom.address },
     { label: 'Tanggal', value: formatDateID(visitDate) },
     { label: 'Waktu', value: visitTime },
   ];
@@ -156,7 +158,7 @@ export const ShowroomReservationModal: React.FC<ShowroomReservationModalProps> =
                   </span>
                   <h3 className="font-serif text-lg sm:text-2xl font-normal text-[#1A1A1A] leading-snug mt-1 flex items-start gap-2">
                     <MapPin className="w-4 h-4 text-[#26496C] shrink-0 mt-1" />
-                    <span className="line-clamp-2">{showroom.name}</span>
+                    <span className="line-clamp-2">{selectedShowroom.name}</span>
                   </h3>
                 </div>
                 <motion.button
@@ -326,10 +328,30 @@ export const ShowroomReservationModal: React.FC<ShowroomReservationModalProps> =
                           />
                         </div>
 
+                        <div>
+                          <label className="block text-[10px] uppercase font-bold tracking-[0.2em] text-[#8C8276] mb-1.5">
+                            Lokasi Showroom *
+                          </label>
+                          <select
+                            value={selectedShowroom.id}
+                            onChange={(e) => {
+                              const next = SHOWROOMS_DATA.find((s) => s.id === e.target.value);
+                              if (next) setSelectedShowroom(next);
+                            }}
+                            className="w-full bg-white border border-[#E5E3DF] text-xs sm:text-sm p-2.5 text-[#1A1A1A] focus:outline-none focus:border-[#1A1A1A]"
+                          >
+                            {SHOWROOMS_DATA.map((s) => (
+                              <option key={s.id} value={s.id}>
+                                {s.name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+
                         <div className="p-3.5 bg-white border border-[#E5E3DF] border-l-4 border-l-[#26496C] text-xs sm:text-sm text-[#6B6B5F] font-light leading-relaxed">
-                          <p className="font-semibold text-[#1A1A1A] mb-0.5">Lokasi Kunjungan: {showroom.name}</p>
-                          <p>{showroom.address}</p>
-                          <p className="text-[#8C8276] mt-0.5 text-xs">Jam Operasional: {showroom.hours}</p>
+                          <p className="font-semibold text-[#1A1A1A] mb-0.5">Lokasi Kunjungan: {selectedShowroom.name}</p>
+                          <p>{selectedShowroom.address}</p>
+                          <p className="text-[#8C8276] mt-0.5 text-xs">Jam Operasional: {selectedShowroom.hours}</p>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

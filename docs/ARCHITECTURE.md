@@ -135,7 +135,7 @@ Yang perlu diingat: `SITE_URL` di `seo.ts` satu-satunya sumber domain untuk SEO 
 
 ## Modal reservasi
 
-ShowroomReservationModal dirender oleh PageLayout dan dibuka lewat konteks `usePageActions()` (fungsi `openReservation`), dipakai dari CTA (`CTABand`), header, footer, dan berbagai halaman. Khusus kartu showroom, `ShowroomsSection` merender instance modal sendiri dengan state lokal supaya lokasinya selalu mengikuti showroom yang diketuk. Modal memformat tanggal, waktu, dan ringkasan data, lalu menyusun pesan ke WhatsApp lewat `wa.ts`. Saat modal terbuka, body di-kunci scroll-nya (`useScrollLock`), dan perilaku tambahannya diatur `useModalBehaviour`.
+ShowroomReservationModal dirender oleh PageLayout dan dibuka lewat konteks `usePageActions()` (fungsi `openReservation`), dipakai dari CTA (`CTABand`), header, footer, dan berbagai halaman. Khusus kartu showroom, `ShowroomsSection` merender instance modal sendiri dan mengirim showroom yang sedang dipilih sebagai preset lokasi. Di dalam form ada dropdown "Lokasi Showroom" (sumbernya `SHOWROOMS_DATA`), jadi meski modal dibuka dari mana pun, pengunjung tetap bisa mengganti lokasinya. Modal memformat tanggal, waktu, dan ringkasan data, lalu menyusun pesan ke WhatsApp lewat `wa.ts`. Saat modal terbuka, body di-kunci scroll-nya (`useScrollLock`), dan perilaku tambahannya diatur `useModalBehaviour`.
 
 Jangan pindahkan logika form ke luar modal kecuali benar-benar perlu. Satu sumber kebenaran tetap `wa.ts`.
 
