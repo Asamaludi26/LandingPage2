@@ -1,327 +1,187 @@
-# Arsitektur File & Sistem (Architecture)
+# Arsitektur Nusa Atelier
 
-## Nusa Atelier — Struktur Kode & Alur Komponen
+Dokumen ini menjelaskan bagaimana kode disusun, ke mana data mengalir, dan aturan yang harus dipegang saat ngubah-ngubah. Urutan baca yang pas: PRD, TECH_STACK, baru file ini.
 
-Dokumen ini adalah referensi teknis arsitektur source code aktual. **Apabila isi dokumen ini berbeda dari isi file `.ts/.tsx`, yang benar adalah isi file source.** Seluruh data konten terpusat di `src/content/*.ts` (lihat `docs/PANDUAN-KONTEN.md`).
+Catatan: semua yang tertulis di sini sesuai kondisi kode yang berjalan sekarang, bukan rencana di atas kertas.
 
----
+## Gambaran besar
 
-### 1. Struktur Pohon Direktori (Directory Tree)
+Ini SPA React 19 + Vite, routing ditangani React Router dengan URL bersih (tanpa `#`). Beberapa hal yang jadi ciri khas project ini:
+
+- Semua data dipegang `src/content/`. Teks, produk, showroom, testimoni, FAQ, sampai meta SEO hidup di satu tempat. Komponen tinggal membaca, tidak menulis teks sendiri.
+- Kontennya statis. Tidak ada fetch di runtime; data diketik TypeScript dan ikut di-bundle.
+- Tidak ada backend. Jalan keluar dari sistem cuma dua: membuka WhatsApp (via `wa.me`) dan nelpon.
+
+## Struktur file
+
+Yang penting saja, sisanya komponen pendukung:
 
 ```
-.
-├── .gitignore                  # Daftar file/folder yang diabaikan Git
-├── index.html                  # Entry point HTML (font, meta SEO, #root)
-├── package.json                # Dependensi & scripts (dev/build/lint/preview/clean)
-├── README.md                   # Landing ringkas → menunjuk seluruh dokumen ke docs/
-├── tsconfig.json               # Konfigurasi TypeScript (strict)
-├── vite.config.ts              # Konfigurasi Vite + plugin Tailwind v4 (alias "@")
-│
-├── public/                     # Aset statis (di-salin apa adanya oleh Vite)
-│   ├── favicon.svg             # Ikon situs (monogram NA)
-│   └── assets/                 # Seluruh gambar lokal: unsplash-*.jpg, og-cover.jpg
-│
-├── docs/                       # ★ Seluruh dokumentasi proyek (.md)
-│   ├── README.md               # Indeks dokumentasi + arsitektur konten + quick start
-│   ├── PRD.md                  # Product Requirements Document
-│   ├── TECH_STACK.md           # Spesifikasi stack teknologi
-│   ├── ARCHITECTURE.md         # File ini — arsitektur aplikasi
-│   ├── FAKTA-PELANGGAN.md      # Fakta riil untuk komunikasi/Presentasi ke pelanggan (PM)
-│   ├── PANDUAN-KONTEN.md       # Panduan edit konten src/content/ (per halaman)
-│   └── PANDUAN-DEVELOPMENT.md  # Handbook pengembangan (alur kerja, konvensi, deploy, troubleshooting)
-│
-├── dist/                       # Hasil build (vite build) — jangan di-edit manual
-│
-└── src/                        # Seluruh kode sumber aplikasi
-    ├── App.tsx                 # Routing utama (6 route, lazy loading, Suspense)
-    ├── index.css               # Entry CSS: Tailwind v4, @utility no-scrollbar, CSS Lenis
-    ├── main.tsx                # Entry React: createRoot + StrictMode + BrowserRouter
-    │
-    ├── components/
-    │   ├── layout/             # Komponen kerangka halaman
-    │   │   ├── Header.tsx               # Sticky nav, mega menu dropdown, mobile drawer, focus trap
-    │   │   ├── Footer.tsx               # Footer gelap, tautan, kontak showroom, tombol modal
-    │   │   ├── FloatingWhatsApp.tsx     # FAB + quick-chat box WhatsApp Concierge
-    │   │   ├── PageHero.tsx             # Hero reusable untuk halaman dalam (kicker/CTA)
-    │   │   ├── PageLayout.tsx           # Layout induk + PageActionsContext + modal global
-    │   │   └── PageStaticSections.tsx   # Penutup statis reusable: CTABand? → Showrooms → Testimonials → FAQ
-    │   │
-    │   ├── modals/             # Komponen dialog modal
-    │   │   └── ShowroomReservationModal.tsx   # Form reservasi showroom → preview WA → kirim
-    │   │
-    │   ├── sections/           # Section konten (dipakai lintas halaman)
-    │   │   ├── Hero.tsx                # Slideshow 3-slide autoplay + swipe (ID #beranda)
-    │   │   ├── AboutSection.tsx        # Tab Kisah/Workshop/Wholesale (ID #tentang-kami)
-    │   │   ├── ProductCategories.tsx   # Katalog terfilter (ID #koleksi-produk)
-    │   │   ├── EndToEndService.tsx     # 4 tahap layanan (ID #layanan)
-    │   │   ├── ShowroomsSection.tsx    # Pilih showroom + tab + modal reservasi (ID #showroom)
-    │   │   ├── Testimonials.tsx        # 3 testimoni + banner arsitek
-    │   │   └── FaqSection.tsx          # Accordion FAQ (ID #faq)
-    │   │
-    │   └── ui/                 # Komponen reusable kecil
-    │       ├── CTABand.tsx             # Band CTA gelap reusable (Reservasi + WA)
-    │       ├── CtaButton.tsx           # Tombol CTA multi-varian (4 varian)
-    │       ├── Editorial.tsx           # MaskReveal & CinematicImg (gaya editorial)
-    │       ├── Reveal.tsx              # Scroll-reveal utama (Reveal/RevealGroup/RevealItem/RevealImg)
-    │       └── WhatsAppIcon.tsx        # Icon WhatsApp resmi (SVG trade dress)
-    │
-    ├── content/               # ★ SSOT seluruh konten statis (produk, showroom, testimoni, FAQ, teks halaman)
-    │   │                       #   (panduan edit: docs/PANDUAN-KONTEN.md)
-    │   ├── index.ts           # Barrel — re-export semua konstanta
-    │   ├── layout.ts          # SITE_INFO, NAV_LINKS, LOGO, TOPBAR, HEADER_CTA, DRAWER, FOOTER
-    │   ├── sections.ts        # HERO_SLIDES, ABOUT_SECTION, PRODUCT_CATEGORIES_SECTION, END_TO_END_SERVICE,
-    │   │                      #   TESTIMONIALS_SECTION, FAQ_SECTION, SHOWROOMS_SECTION, CTABAND, WHATSAPP_FLOAT, PAGE_HERO
-    │   ├── products.ts        # PRODUCT_CATEGORIES, PRODUCTS_DATA
-    │   ├── showrooms.ts       # SHOWROOMS_DATA
-    │   ├── testimonials.ts    # TESTIMONIALS_DATA
-    │   ├── faqs.ts            # FAQS_DATA
-    │   ├── workflow.ts        # WORKFLOW_STEPS
-    │   ├── about.ts           # ABOUT_PAGE
-    │   ├── collections.ts     # PRODUCTS_PAGE
-    │   ├── productDetail.ts   # PRODUCT_DETAIL_PAGE
-    │   └── services.ts        # SERVICES_PAGE
-    │
-    ├── lib/                    # Pustaka utilitas & hooks
-    │   ├── animations.ts       # Preset Motion: ease, viewportConfig, microButton, navDrawer*, reveal*
-    │   ├── scroll.ts           # smoothScrollTo(target, duration) & scrollToTop(immediate) — Lenis-aware
-    │   ├── useLenis.ts         # useSmoothScroll() — inisialisasi Lenis + expose window.__lenis
-    │   ├── useModalBehaviour.ts# Perilaku modal: Escape, focus trap, restore focus
-    │   ├── useScrollLock.ts    # Kunci scroll latar saat modal/drawer terbuka
-    │   └── wa.ts               # buildWaLink() & allowWaOpen() — nomor WA obfuscated + guard anti-spam
-    │
-    └── pages/                  # Halaman per route
-        ├── HomePage.tsx             # Route "/" (diekspor eager — tanpa lazy)
-        ├── AboutPage.tsx            # Route "/tentang-kami" (lazy)
-        ├── ProductsPage.tsx         # Route "/koleksi-produk" (lazy)
-        ├── ProductDetailPage.tsx    # Route "/koleksi-produk/:productId" (lazy)
-        └── ServicesPage.tsx         # Route "/layanan" (lazy)
+index.html                    # shell HTML: meta SEO global, JSON-LD Organization, favicon
+public/
+  favicon.svg                 # monogram "NA"
+  assets/                     # gambar produk + og-cover (og:image untuk SEO)
+  robots.txt
+  sitemap.xml                 # 4 halaman utama + 9 produk
+src/
+  main.tsx                    # render App dengan BrowserRouter
+  App.tsx                     # definisi rute + PageLayout + page transition
+  index.css                   # Tailwind v4 + style dasar (font, scrollbar, utility)
+  components/
+    layout/                   # PageLayout, Header, Footer, FloatingWhatsApp,
+                              # PageHero, PageStaticSections
+    sections/                 # Hero, AboutSection, ProductCategories,
+                              # EndToEndService, ShowroomsSection, Testimonials,
+                              # FaqSection, ProjectGallery
+    modals/                   # ShowroomReservationModal
+    ui/                       # Reveal, Editorial, CtaButton, CTABand,
+                              # WhatsAppIcon, WaLimitToast
+  content/
+    index.ts                  # semua data konten diekspor lewat sini
+    layout.ts                 # SITE_INFO, NAV_LINKS, TOPBAR, FOOTER
+    sections.ts               # teks dan data section beranda
+    products.ts               # PRODUCT_CATEGORIES + PRODUCTS_DATA (9 produk)
+    collections.ts            # teks halaman /koleksi-produk
+    productDetail.ts          # detail tambahan per produk
+    showrooms.ts              # SHOWROOMS_DATA (2 lokasi)
+    testimonials.ts           # TESTIMONIALS_DATA
+    faqs.ts                   # FAQS_DATA
+    about.ts                  # teks halaman /tentang-kami
+    services.ts               # teks halaman /layanan
+    workflow.ts               # data proses kerja
+    seo.ts                    # SITE_URL, metadata rute, generator JSON-LD
+  lib/
+    wa.ts                     # nomor WA, obfuscation, session key, event
+    useSeo.ts                 # hook SEO per halaman
+    scroll.ts                 # smoothScrollTo, setSectionHash, HEADER_OFFSET
+    animations.ts             # preset animasi (easing, reveal, nav, page)
+    useLenis.ts               # smooth-scroll via Lenis
+    useScrollLock.ts          # kunci scroll saat modal terbuka
+    useModalBehaviour.ts      # perilaku modal reservasi
+  pages/
+    HomePage.tsx              # beranda
+    AboutPage.tsx             # /tentang-kami
+    ProductsPage.tsx          # /koleksi-produk (dengan filter)
+    ProductDetailPage.tsx     # /koleksi-produk/:productId
+    ServicesPage.tsx          # /layanan
 ```
 
----
+Catatan soal `sitemap.xml`: isinya 4 halaman utama plus 9 produk. Setiap produk atau halaman baru wajib ditambahkan ke situ, kalau tidak SEO-nya tidak ikut ter-index.
 
-### 2. Routing & Entry Points
+## Routing
 
-#### `src/main.tsx`
-- `createRoot` → `<App/>` di dalam `<React.StrictMode>` dan `<BrowserRouter>`.
+Rute resmi di `App.tsx`:
 
-#### `src/App.tsx` — Tabel Route
-
-| Path | Komponen | Loading |
-| :--- | :--- | :--- |
-| `/` | `HomePage` | Eager (di-import langsung) |
-| `/tentang-kami` | `AboutPage` | `React.lazy` |
-| `/koleksi-produk` | `ProductsPage` | `React.lazy` |
-| `/koleksi-produk/:productId` | `ProductDetailPage` | `React.lazy` |
-| `/layanan` | `ServicesPage` | `React.lazy` |
-| `*` (fallback) | `<Navigate to="/" replace>` | — |
-
-- Semua halaman lazy dibungkus `<Suspense fallback={<PageFallback/>}>` — spinner loading besar minimalis.
-- Seluruh `Routes` berada di dalam `<PageLayout>` sehingga Header/Footer/modal muncul di semua halaman.
-- **Transisi halaman**: `<AnimatedRoutes>` membungkus `Routes` dengan `<AnimatePresence mode="wait">` + `motion.div key={location.pathname}` memakai preset `pageTransition` (`animations.ts`) — halaman lama naik-keluar 0.22s, halaman baru fade+rise 0.55s (`LUXURY_EASE`); header/footer tetap statis. Key = `pathname` sehingga navigasi hash/query di halaman yang sama (mis. `/layanan#…`, `?kategori=…`) tidak men-trigger transisi ulang. Chunk route di-prefetch ~300ms setelah mount agar transisi tak menampilkan spinner.
-
-#### Susunan Halaman (urutan section)
-
-| Halaman | Urutan Section |
+| URL | Halaman |
 | :--- | :--- |
-| `HomePage` | `Hero` → `AboutSection` → `ProductCategories` → `EndToEndService` → `PageStaticSections` (tanpa CTABand) |
-| `AboutPage` | `PageHero` → Metrics → Heritage & Story → **Journey Timeline** (band gelap) → Workshop & Atelier (4 kartu fitur) → **Craft Process** (4 kartu tahap) → **Quality & Warranty** (checklist + 4 stat garansi) → Wholesale (+ badge wilayah) → Pillars → `PageStaticSections` (dengan CTABand) |
-| `ProductsPage` | `PageHero` → Advantage strip → Category Spotlights → Katalog Lengkap (`#katalog-lengkap`) → `PageStaticSections` (dengan CTABand) |
-| `ProductDetailPage` | Breadcrumb → Hero produk → Galeri (CinematicImg + thumbs) → Spesifikasi + QUICK_FACTS → Komposisi Material → Fitur + Callouts → Slider "Semua Produk" → Cara Memesan → `PageStaticSections` (dengan CTABand) |
-| `ServicesPage` | `PageHero` → Ikhtisar + stat → 4 Lini Layanan → 4 Tahap Proses (deep dive) → Layanan Khusus → Garansi & Purnajual → Galeri Realisasi (slider 6 foto via `ProjectGallery`) → `PageStaticSections` (dengan CTABand) |
+| `/` | Beranda (Hero, Tentang, Koleksi, End-to-End, Showroom, Testimoni, FAQ) |
+| `/tentang-kami` | Tentang |
+| `/koleksi-produk` | Koleksi produk + filter |
+| `/koleksi-produk/:productId` | Detail produk |
+| `/layanan` | Layanan |
 
-> **Pola penutup halaman**: Empat halaman dalam memakai komponen bersama `PageStaticSections` (`components/layout/PageStaticSections.tsx`) yang me-render `CTABand` (konten via prop `ctaBand`) → `ShowroomsSection` → `Testimonials` → `FaqSection`. Beranda memanggil komponen yang sama dengan `ctaBand={null}` (tanpa band CTA). Menambah/mengurangi/mengganti urutan section statis cukup di satu komponen ini.
+Semua dibungkus `PageLayout`. Dia yang memuat Header, Footer, FloatingWhatsApp, ShowroomReservationModal, WaLimitToast, dan memanggil `useRouteSeo`. Halaman-halaman selain beranda dimuat lazy (React.lazy) dengan prefetch diam-diam setelah 300 ms supaya transisi halaman tidak menampilkan loader.
 
----
+Pindah halaman memakai transisi halus via `AnimatePresence` + `pageTransition` dari `animations.ts` (lamanya sekitar setengah detik, tidak mengganggu).
 
-### 3. Aliran Data & State Management
+Rute yang tidak dikenal (belum ada di daftar) diarahkan balik ke beranda dengan `<Navigate to="/" replace />`. Kami sengaja tidak membuat halaman 404 terpisah.
 
-Aplikasi tanpa backend: **semua konten statis** dari `src/content/*.ts`; seluruh konversi lead dilakukan via **WhatsApp link** yang dibangun `src/lib/wa.ts`.
-
-#### A. PageActionsContext (modal global) — pola utama
-
-`src/components/layout/PageLayout.tsx` adalah pemilik seluruh modal global:
+## Alur data
 
 ```
-PageLayout (root layout)
-├─ useSmoothScroll()                 → inisialisasi Lenis, expose window.__lenis
-├─ location.state.scrollTo handling  → scroll lintas halaman
-├─ state isReservationOpen           → ShowroomReservationModal (showroom = SHOWROOMS_DATA[0])
-├─ useScrollLock(...)                → kunci scroll saat reservasi terbuka
-└─ PageActionsContext.Provider
-    ├─ Header        onOpenReservation
-    ├─ main          {children} (halaman aktif)
-    ├─ Footer        onOpenReservation
-    ├─ 1 modal global + FloatingWhatsApp
+src/content/**  ->  komponen (Page/Section/Modal)  ->  render DOM
 ```
 
-Hook publik:
+Data diimpor langsung dari `src/content/index.ts`, tidak ada lapisan server. Tiap entitas punya tipe (Product, Showroom, Section, dan seterusnya); kalau menambah field di data, tipe ikut diperbarui.
 
-```typescript
-const { openReservation } = usePageActions(); // dari './PageLayout'
-```
+Detail produk (`/koleksi-produk/:productId`) mencari data pakai `product.id` di `PRODUCTS_DATA`. Jadi id produk adalah syarat mutlak dan harus unik.
 
-- Dipakai oleh: `PageHero`, `HomePage`, `AboutPage`, `ProductsPage`, `ProductDetailPage`, `CTABand` (internal), `ProductCategories`, `EndToEndService`, `Header`, `Footer`.
-- **Pengecualian lokal**: `ShowroomsSection` memiliki *modal reservasi sendiri* dengan state lokal `isReservationOpen` + `selectedShowroom`, sehingga modal mengikuti showroom yang sedang dipilih. Modal ini **bukan** bagian dari `PageActionsContext`.
+## Navigasi
 
-#### B. Navigasi Anchor Antar-Halaman (smooth scroll)
+Nav menu (`NAV_LINKS` di `src/content/layout.ts`) mendukung dua tipe link:
 
-Header (`handleNavClick`) & Footer (`handleAnchor`) memakai pola yang sama:
+- `route`: pindah ke halaman lain lewat router. Contohnya Tentang ke `/tentang-kami`.
+- `anchor`: scroll halus ke id di beranda. Contoh: `#beranda`, `#layanan`, `#showroom`, `#faq`.
 
-```typescript
-if (location.pathname === '/') {
-  smoothScrollTo(href, 1.15);            // sudah di home → scroll langsung
-  setSectionHash(href);                  // hash #section ke address bar (replaceState)
-} else {
-  navigate('/', { state: { scrollTo: href } });  // kirim target via router state
-}
-```
+`Header.tsx` membedakan keduanya lewat `goToSection(href, isRoute)`: kalau `isRoute` benar maka `navigate(href)`, kalau tidak maka `smoothScrollTo(href)`. `handleNavClick` menjalankan semuanya sekaligus: menutup mega menu item yang punya dropdown, menutup drawer mobile, lalu routing atau scroll.
 
-`PageLayout` membaca `location.state.scrollTo`:
+Ada dua item nav yang punya mega menu (Koleksi dan Layanan). Children-nya berisi link route yang kadang membawa hash, misalnya `/koleksi-produk#katalog-lengkap`. Kalau pengguna sudah berada di halaman itu, klik hanya scroll ke bagiannya; kalau belum, router memindahkan dulu ke halamannya. Link "Tentang Kami" di footer juga route `/tentang-kami`.
 
-```typescript
-if (pendingScroll) {
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    smoothScrollTo(pendingScroll);
-    setSectionHash(pendingScroll);       // hash tampil di "lokasi tab"
-  }));
-  navigate(location.pathname, { replace: true, state: null }); // bersihkan state
-} else {
-  scrollToTop(true);   // ganti halaman tanpa target → kembali ke atas
-}
-```
+Soal anchor dari halaman lain: anchor seperti `#showroom` cuma berlaku di beranda. Kalau pengguna sedang di halaman lain, Header mengirim state `{ scrollTo: '#showroom' }`. `PageLayout` yang menerima state ini akan scroll ke target itu lalu membersihkan state; begitu juga sebaliknya, tanpa state ia langsung scroll ke atas. Kalau id suatu section diubah, perbarui juga NAV_LINKS biar tidak patah.
 
-- Efek berjalan pada `[location.pathname]`, menjadikan **navigation ke halaman lain** sekaligus scrolling ke anchor section.
-- Semua fungsi scroll Lenis-aware (`src/lib/scroll.ts`): `smoothScrollTo` menghitung `pixel = rect.top + pageYOffset − HEADER_OFFSET (108px)` lalu memakai `window.__lenis.scrollTo(pixel, { duration })` (fallback `window.scrollTo`) — section mendarat tepat di bawah sticky header; `setSectionHash` menyinkronkan hash tanpa menambah riwayat.
+## WhatsApp concierge
 
-#### C. Tombol Anchor langsung di homepage (tanpa route)
+Semua ada di `src/lib/wa.ts`. Nomor disimpan dalam keadaan terobfuscate: `ENC_DIRECT` didekode jadi nomor asli saat menyusun URL `wa.me`, `ENC_DISPLAY` yang tampil di layar (terlihat acak). Semua tombol memasang helper yang sama, jadi semuanya ngarah ke satu nomor.
 
-- `HomePage.handleExploreProducts()` → `smoothScrollTo('#koleksi-produk', 1.2)`.
-- Diteruskan ke `Hero` sebagai prop `onExploreProducts`.
+Ada proteksi spam di dalamnya:
 
----
+- Cooldown 3 detik antar klik.
+- Maksimal 5 buka per sesi (disimpan di `sessionStorage` dengan key `na_wa_open`).
+- Kalau klik ditahan karena cooldown atau kuota habis, kode memancarkan event `na:wa-limit` yang ditangkap `WaLimitToast` untuk menampilkan pesan, bukan cuma diam.
 
-### 4. Integrasi WhatsApp (`src/lib/wa.ts`)
+`buildWaLink(message)` menghasilkan URL `wa.me/<nomor>?text=<pesan>`, `allowWaOpen()` memutuskan bolak-balik apakah buka diizinkan, `watchWaLimit(handler)` untuk berlangganan event limit.
 
-Semua link WhatsApp dibuat dari satu sumber:
+Aturannya tegas: jangan menulis nomor WA mentah di kode. Saat nomor asli siap, cukup perbarui `wa.ts`, seluruh tombol mengikutinya.
 
-| Sumber | Nilai (real) |
-| :--- | :--- |
-| `WA_DIRECT` | Nomor tanpa `+` (digunakan untuk `wa.me/<nomor>`) |
-| `WA_DISPLAY` | Format human-readable untuk label UI |
-| `buildWaLink(message)` | `https://wa.me/${WA_DIRECT}?text=${encodeURIComponent(message)}` |
-| `allowWaOpen()` | Guard anti-spam: minimal jeda 3 detik antar buka + maks 5×/sesi (`sessionStorage` key `hd_wa_open`). Saat klik ditahan (return `false`), memancarkan `CustomEvent` `hd:wa-limit` agar UI menampilkan feedback — bukan "bisu" |
-| `watchWaLimit(handler)` | Subscribe event `hd:wa-limit` (detail `{ reason: 'cooldown'|'exhausted', maxOpens }`); mengembalikan fungsi unsubscribe. Dipakai `WaLimitToast` |
+## SEO
 
-- Nomor disimpan **obfuscated** (tiap digit di-shift +3) pada konstanta `ENC_DIRECT`/`ENC_DISPLAY`, lalu di-decode saat runtime. Jangan direfaktor menjadi plaintext di source.
-- Setiap elemen `<a href={buildWaLink(...)}>` WAJIB dipasangi:
-  ```tsx
-  onClick={(e) => { if (!allowWaOpen()) e.preventDefault(); }}
-  ```
-  Kecuali pada `FloatingWhatsApp.handleSendQuickMessage` yang langsung `allowWaOpen()` sebelum `window.open`.
+SEO jalan di tiga lapis:
 
-- **Umpan balik anti-spam**: `WaLimitToast` (di-mount di `PageLayout`) mendengarkan `watchWaLimit` dan menampilkan notifikasi elegan saat klik ditahan (cooldown / kuota sesi habis) — sehingga pemblokiran tidak terkesan "rusak/bisu".
+1. `index.html` berisi meta statis: title, description, OG, twitter, canonical, plus JSON-LD Organization. Ini jadi baseline semua halaman.
+2. Hook `useRouteSeo(location)` membaca metadata dari `src/content/seo.ts` per halaman, mengganti title/description/OG/twitter/canonical, lalu menyuntik JSON-LD dinamis ke elemen `#seo-route-jsonld`. Untuk halaman detail produk, meta mengikuti data produk (`productRouteMeta(product)`), jadi tidak perlu diedit manual.
+3. `robots.txt` dan `sitemap.xml` sebagai pelengkap. Sitemap ditulis manual, jangan lupa ditambah tiap ada halaman atau produk baru.
 
----
+Yang perlu diingat: `SITE_URL` di `seo.ts` satu-satunya sumber domain. Jangan hardcode URL di luar file itu.
 
-### 5. Lapisan Scaffold UI
+## Modal reservasi
 
-#### `src/components/layout/Header.tsx`
-- **Top bar** (desktop): alamat showroom, jam operasional, badge "Survei Bebas Biaya", `tel:` phoneGeneral, link WA.
-- **Nav bar sticky**: `isScrolled` (window.scrollY > 30) mengubah latar/tinggi/blur; logo "NA" + Nusa Atelier; 6 nav links. Item ber-menu (`menu: 'links'`, satu-satunya `NavMenuKind`) membuka **mega menu** — buka via hover **dan** klik (toggle, `handleDesktopLinkClick`); panel absolute `top-full` lebar penuh (animasi `navMenuPanel`/`navMenuChild` + aksen `scaleX`, garis `#26496C`), underline indikator `layoutId="desktopNavUnderline"`. Koleksi & Layanan → grid `NavChild[]` = **indeks section halaman tujuan** (list bersih: label + deskripsi + panah `ArrowUpRight` untuk route / `ArrowRight` untuk anchor; hover bg tipis). Koleksi: `/koleksi-produk`, `#koleksi-spesialisasi`, `#katalog-lengkap`. Layanan: `/layanan` + `#layanan-{ikhtisar|ruang-lingkup|proses|khusus|garansi|galeri}` (id section di `ServicesPage`/`ProjectGallery`); ProductsPage membaca `search+hash` dan auto-scroll, ServicesPage scroll ke hash via `smoothScrollTo`. + tautan header "Lihat Semua". Showroom & FAQ → tautan anchor polos tanpa menu (scroll ke `#showroom`/`#faq`). Tutup via mouse-leave (delay 160ms), scroll, Escape, klik di luar bar (`headerBarRef`).
-- **CTA**: tombol "Reservasi Showroom" (buka reservation modal).
-- **Mobile drawer**: slide-in dari kanan (`navDrawerVariants`), backdrop (`navBackdropVariants`), item stagger (`navItemStagger`), item ber-menu jadi **accordion** (`expandedItem`, `AnimatePresence` height), focus trap manual, Escape close, `useScrollLock`, restore focus.
+ShowroomReservationModal dirender oleh PageLayout dan dibuka lewat konteks `usePageActions()` (fungsi `openReservation`), dipakai dari kartu showroom, CTA, header, maupun footer. Modal memformat tanggal, waktu, dan ringkasan data, lalu menyusun pesan ke WhatsApp lewat `wa.ts`. Saat modal terbuka, body di-kunci scroll-nya (`useScrollLock`), dan perilaku tambahannya diatur `useModalBehaviour`.
 
-#### `src/components/layout/Footer.tsx`
-- 4 kolom: brand (logo + deskripsi + badge garansi), Navigasi Cepat, Koleksi & Spesialisasi, Galeri Showroom (2 lokasi + tombol Reservasi).
-- Bottom bar: copyright + tautan legal (statis).
-- `fadeInUp` (viewportConfig) untuk animasi grid atas.
+Jangan pindahkan logika form ke luar modal kecuali benar-benar perlu. Satu sumber kebenaran tetap `wa.ts`.
 
-#### `src/components/layout/FloatingWhatsApp.tsx`
-- FAB melingkar hijau `#25D366` di kanan-bawah; membuka quick-chat box (AnimatePresence): header "Konsultan Siap Membantu", 4 quick messages (pre-filled message), dan tombol "Buka Percakapan WhatsApp".
-- Escape menutup box; `data-lenis-prevent` pada box.
+## Animasi
 
-#### `src/components/layout/PageHero.tsx` — Props
-```typescript
-interface PageHeroProps {
-  breadcrumbLabel: string;
-  kicker: string;
-  title: string;        // baris pertama, class biasa
-  accent: string;       // baris kedua, italic accent
-  description: string;
-  image: string;
-  alt: string;
-}
-```
-- Kiri: breadcrumb (Beranda → label), kicker MaskReveal, judul MaskReveal 2 baris, garis aksen `#26496C`, deskripsi, lalu `CtaButton` Reservasi (primary) yang memanggil `usePageActions`.
-- Kanan: gambar `CinematicImg pan="up" once={false}` dalam frame 4/5.
+Preset semua ada di `src/lib/animations.ts`. Yang sering dipakai:
 
----
+- `LUXURY_EASE` — easing bawaan untuk hampir semua transisi.
+- `revealVariants` — arah reveal (up, down, left, right, fade, zoom, blur).
+- `pageTransition` — transisi antar rute di App.
+- `navMenuPanel` / `navItemStagger` — animasi mega menu.
+- `fadeInUp`, `microButton`, `staggerContainer` — utilitas lain.
 
-### 6. Sistem Animasi (`src/lib/animations.ts`)
+Komponen animasi ada di `ui/`:
 
-| Preset | Nilai / Peran |
-| :--- | :--- |
-| `LUXURY_EASE` | `[0.16, 1, 0.3, 1]` — easing utama seluruh UI |
-| `EASE_EDITORIAL` | `[0.77, 0, 0.175, 1]` — line-reveal MaskReveal |
-| `EASE_CINEMATIC` | `[0.65, 0, 0.35, 1]` — reveal gambar CinematicImg |
-| `viewportConfig` | `{ once: true, margin: '0px 0px 80px 0px', amount: 0.05 }` — dipakai `fadeInUp` di Footer |
-| `fadeInUp` | Prop spread untuk animasi fade+rise sekali jalan |
-| `microButton` | `whileHover / whileTap` untuk tombol |
-| `navDrawerVariants` | Slide-in drawer kanan (kecepatan beda saat open vs close) |
-| `navBackdropVariants` | Opacity backdrop drawer |
-| `navItemStagger` | Item drawer masuk berjenjang (custom index) |
-| `revealVariants` | Tabel per arah: `up`, `down`, `left`, `right`, `fade`, `zoom`, `blur` |
-| `staggerContainer(stagger, delayChildren)` | Variant induk untuk stagger anak |
-| `revealTransition(duration)` | Transition standar reveal (LUXURY_EASE) |
+- `Reveal` — reveal per elemen, bisa diatur arah, durasi, dan once.
+- `RevealGroup` + `RevealItem` — untuk stagger antar elemen sekelas.
+- `RevealImg` — gambar muncul dengan pan/zoom sinematik.
+- `MaskReveal` dan `CinematicImg` (di Editorial) — teks yang terbuka dari balik mask dan foto yang dulu muncul seperti edisi majalah.
 
-Catatan: preset `LUXURY_SPRING`, `fadeIn`, `fadeInLeft`, `fadeInRight`, `cardStagger`, `microCard`, `microBadge` **tidak lagi ada di file aktual** — jangan dirujuk dalam kode baru.
+Aturannya sederhana: tiru pola yang sudah ada. Jangan bikin animasi baru yang lebih heboh dari yang sekarang; ini brand quiet luxury.
 
----
+## Section CTA
 
-### 7. Scroll Reveal & Editorial (`ui/Reveal.tsx`, `ui/Editorial.tsx`)
+`CTABand` (di `ui/`) adalah band gelap penutup halaman: judul, aksen, deskripsi, dan dua tombol (reservasi + WhatsApp). Datanya (`CTABAND`) ada di `sections.ts`. `PageStaticSections` (di `layout/`) yang menyusun urutan penutup hampir semua halaman: CTABand opsional → Showrooms → Testimonials → FAQ. Memakai satu komponen ini untuk semua halaman lebih gampang daripada markup diulang.
 
-**`Reveal.tsx`** (satu-satunya wrapper scroll-reveal — pengganti `AnimatedSection`/`AnimateIn` yang sudah dihapus):
+Timpa hanya lewat props `ctaBand`, `showShowrooms`, `showTestimonials`, `showFaq`. Di beranda CTABand dilewati karena sudah ada CTA di EndToEndService.
 
-| Komponen | Fungsi |
-| :--- | :--- |
-| `Reveal` | Reveal dua arah (`once` default **false**), `direction` dari `RevealDir`, support `as` (div/span/li/section), `delay`, `duration`, `className` |
-| `RevealGroup` | Variant induk `staggerContainer` untuk meng-stagger `RevealItem` anak |
-| `RevealItem` | Item anak di dalam `RevealGroup` |
-| `RevealImg` | Gambar dengan zoom-in reveal (`scale 1.15 → 1`) + fade, dua arah |
+## Styling
 
-Intern sequencing: `useInView` dengan `margin: '0px 0px -40px 0px'`, `amount: 0.01` (Reveal) — **jangan diubah** kecuali sengaja, karena berpasangan dengan `viewportConfig` Footer (margin +80px).
+Tailwind v4 tanpa file config; aturan tambahan ditulis langsung di `src/index.css`. Di sana ada style dasar (`body` memakai font **Plus Jakarta Sans**), kelas `.font-serif` untuk judul **Cormorant Garamond**, utility `no-scrollbar`, dan styling scrollbar. Kedua font dimuat dari Google Fonts lewat `index.html` (dengan `preconnect` dan `display=swap`).
 
-**`Editorial.tsx`**:
-- `MaskReveal` — garis teks tersembunyi (overflow-hidden) naik `y: '112%' → 0`; `EASE_EDITORIAL`; `margin: -30px`, `amount: 0.1`. Dipakai untuk kicker/kicker baris, judul utama, dan heading section.
-- `CinematicImg` — gambar dengan `scale 1.22 → 1` + pan opsional (`pan: 'none' | 'left' | 'right' | 'up'`); `EASE_CINEMATIC`; `margin: -40px`, `amount: 0.2`, `once` default **true**.
+Warna memakai utility arbitrary dengan hex langsung di komponen, misalnya latar `bg-[#F9F8F6]`, teks `text-[#1A1A1A]`, aksen emas `text-[#E5C38E]`, band gelap `bg-[#151515]`. Tidak ada blok `@theme` atau token warna khusus — kalau menambah warna, ikutkan kebiasaan ini alias hex inline.
 
----
+Beberapa aturan:
 
-### 8. CTA & Styling
+- Pakai utility Tailwind, jangan inline style `style={{...}}`.
+- Responsive memakai breakpoint bawaan (`md:`, `lg:`).
+- Font serif/sans yang dipakai jangan diganti sembarangan; kalau menarik dari Google Fonts, sesuaikan juga `index.html`.
 
-**`CtaButton.tsx`** — render `motion.a` bila `href` disediakan, selain itu `motion.button`. Varian:
+## Konvensi kode
 
-| Varian | Gaya |
-| :--- | :--- |
-| `primary` | BG `#26496C`, hover `#1D3A58`, teks putih (CTA utama) |
-| `secondary` | Putih, border `#E5E3DF`, teks `#1A1A1A` |
-| `onDark` | BG putih, teks `#151515` (di atas hero gelap / band gelap) |
-| `onDarkOutline` | Border `white/20`, teks putih (di atas gelap) |
+- TypeScript strict, `npm run lint` harus nol error.
+- Nama file komponen PascalCase, lib/hook camelCase.
+- Data diimpor lewat `src/content/index.ts`.
+- Tidak ada `console.log` di kode produksi (kecuali memang sengaja di `wa.ts` untuk debug).
+- Nomor telepon/WA muncul lewat helper `wa.ts`, bukan ditulis mentah.
 
-**`CTABand.tsx`** — band gelap `#151515`; props `title`, `accent?`, `description?`. Memakai `usePageActions().openReservation` untuk "Reservasi Kunjungan" + CTA sekunder ke WhatsApp. Digunakan pada `AboutPage`, `ProductsPage`, `ProductDetailPage`.
-
-**Palet warna utama** (Tailwind arbitrary values): Canvas `#F9F8F6`, Teks `#1A1A1A`/`#4A4A3A`/`#6B6B5F`, Aksen `#5A5A40`, Border `#E5E3DF`, Biru CTA `#26496C`, Emas `#E5C38E`, Hijau WA `#25D366`.
-
-**Font**: serif `Cormorant Garamond` (`.font-serif`, di-declare di `index.css`), sans `Plus Jakarta Sans` (body di `index.html` + `index.css`).
-
-**`index.css`** — memuat Tailwind v4 `@import "tailwindcss"`, `@utility no-scrollbar` (utilitas custom, dipakai tab horizontal & galeri), layer base (font body, warna, `overflow-x:hidden`), helper Lenis (`data-lenis-prevent`, `.lenis-stopped`), dan custom scrollbar WebKit.
-
----
-
-### 9. Pola yang Harus Dipatuhi Saat Mengubah Kode
-
-1. **SSOT konten**: Ubah teks/produk/showroom/FAQ hanya di `src/content/*.ts` (lalu ikuti `docs/PANDUAN-KONTEN.md`). Folder lama `src/data/` sudah dihapus.
-2. **SSOT animasi**: Jangan menempel easing/margin viewport acak; pakai preset `animations.ts` dan komponen `Reveal`/`MaskReveal`/`CinematicImg`.
-3. **Semua WA link** via `buildWaLink()` + guard `allowWaOpen()`.
-4. **Modal global** via `usePageActions()`; modal spesifik-konteks (reservasi per showroom) boleh lokal di section.
-5. **`npm run lint`** (`tsc --noEmit`) wajib bersih sebelum finish.
+Lanjutkan ke PANDUAN-DEVELOPMENT.md untuk langkah menambah halaman, section, atau produk.

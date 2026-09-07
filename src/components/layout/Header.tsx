@@ -138,9 +138,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenReservation }) => {
 
   const navLinks = NAV_LINKS;
 
-  const goToSection = (href: string) => {
+  const goToSection = (href: string, isRoute = false) => {
     setOpenMenu(null);
     setMobileMenuOpen(false);
+
+    if (isRoute) {
+      navigate(href);
+      return;
+    }
 
     if (location.pathname === '/') {
       smoothScrollTo(href, 1.15);
@@ -151,9 +156,9 @@ export const Header: React.FC<HeaderProps> = ({ onOpenReservation }) => {
     navigate('/', { state: { scrollTo: href } });
   };
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, link: NavLink) => {
     e.preventDefault();
-    goToSection(href);
+    goToSection(link.href, link.type === 'route');
   };
 
   const handleChildClick = (e: React.MouseEvent<HTMLAnchorElement>, child: NavChild) => {
@@ -182,7 +187,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenReservation }) => {
       setOpenMenu(openMenu === link.href ? null : link.href);
       return;
     }
-    handleNavClick(event, link.href);
+    handleNavClick(event, link);
   };
 
   const openLink = navLinks.find((link) => link.href === openMenu) ?? null;
@@ -267,7 +272,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenReservation }) => {
             initial="closed"
             animate="open"
             href={link.href}
-            onClick={(e) => handleNavClick(e, link.href)}
+            onClick={(e) => handleNavClick(e, link)}
             className="flex items-center justify-between py-3 px-3 border-b border-[#EBE8E2] text-xs uppercase tracking-[0.2em] font-semibold text-[#55554B] hover:text-[#1A1A1A] hover:bg-[#EFECE6] transition-all cursor-pointer group"
           >
             <span className="group-hover:translate-x-1 transition-transform duration-200">

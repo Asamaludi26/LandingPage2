@@ -1,123 +1,59 @@
-# Technical Stack Documentation (Tech Stack)
-## Nusa Atelier — Architecture & Dependencies Specification
+# Tech Stack Nusa Atelier
 
----
+Catatan tentang teknologi yang dipakai, lengkap dengan versinya. Versi di sini harus sinkron dengan `package.json`; kalau ada update library, perbarui dua-duanya.
 
-### 1. Ikhtisar Stack Teknologi (Technology Overview)
+## Pustaka inti
 
-Aplikasi **Nusa Atelier** dibangun dengan arsitektur **Single Page Application (SPA)** berbasis modern web stack dengan fokus pada performa tinggi, animasi *luxury tier*, *strict type safety*, dan kemudahan pemeliharaan.
+Versi berikut sesuai deklarasi di `package.json` (pakai tanda `^` sesuai semver):
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                       Client Layer                          │
-│  React 19 (TypeScript 5.8 strict) + Tailwind CSS v4 +       │
-│  Motion for React + react-router-dom 7 + lucide-react       │
-├─────────────────────────────────────────────────────────────┤
-│                    Animation & Smooth Engine                │
-│  Lenis Smooth Scroll + Motion (Cubic-Bezier Easing)         │
-├─────────────────────────────────────────────────────────────┤
-│                       Build & Runtime                       │
-│  Vite 6.2 + @vitejs/plugin-react + @tailwindcss/vite        │
-└─────────────────────────────────────────────────────────────┘
-```
+- React dan React DOM `^19.0.1`
+- Vite `^6.2.3` sebagai bundler
+- @vitejs/plugin-react `^5.0.4`
+- Tailwind CSS `^4.1.14` lewat @tailwindcss/vite `^4.1.14`, konfigurasi via CSS, tanpa `tailwind.config.js`
+- TypeScript `~5.8.2`
+- React Router DOM `^7.18.3`
+- Motion `^12.23.24` untuk animasi (yang dulu namanya framer-motion)
+- Lenis `^1.3.26` untuk smooth-scroll
+- lucide-react `^0.546.0` untuk ikon
 
----
+## Perintah
 
-### 2. Spesifikasi Bahasa & Pustaka Utama (Core Technologies)
-
-| Kategori | Teknologi | Versi (package.json) | Peran |
-| :--- | :--- | :--- | :--- |
-| **Framework UI** | `react` | `^19.0.1` | Pustaka antarmuka deklaratif dengan React Compiler ready & reconciliation tercepat. |
-| **DOM Renderer** | `react-dom` | `^19.0.1` | Rendering komponen ke DOM. |
-| **Bahasa** | `typescript` | `~5.8.2` | Strict typing; `tsc --noEmit` sebagai quality gate. |
-| **Build & Dev Server** | `vite` | `^6.2.3` | Bundler esbuild/Rollup, cold start sub-detik, alias `@` → root. |
-| **Plugin React** | `@vitejs/plugin-react` | `^5.0.4` | Fast Refresh & JSX transform. |
-| **CSS Framework** | `tailwindcss` | `^4.1.14` | Utility-first CSS v4 via `@tailwindcss/vite` (tanpa tailwind.config). |
-| **Tailwind Vite** | `@tailwindcss/vite` | `^4.1.14` | Plugin resmi Tailwind v4 untuk Vite. |
-| **Mesin Animasi** | `motion` | `^12.23.24` | Solusi deklaratif (Framer Motion successor): `layoutId`, `AnimatePresence`, spring physics, `useInView`. |
-| **Inertial Scrolling** | `lenis` | `^1.3.26` | Smooth momentum scrolling; instance di `window.__lenis`. |
-| **Router** | `react-router-dom` | `^7.18.3` | BrowserRouter, nested routes, `React.lazy` + `Suspense`. |
-| **Ikonografi** | `lucide-react` | `^0.546.0` | Ikon vektor ringan & tree-shakeable. |
-
----
-
-### 3. Sistem Desain & Konfigurasi Styling (Design System)
-
-Estetika **Quiet Luxury & Warm Minimalism**:
-
-* **Palet Warna**:
-  - `Canvas`: `#F9F8F6` (warm stone) — background utama
-  - `Text`: `#1A1A1A` (charcoal)
-  - `Dark Container`: `#151515` (CTABand, Footer) & `#141414`
-  - `Accent Olive`: `#5A5A40` (border accent layanan/produk)
-  - `CTA Blue Navy`: `#26496C` (tombol utama) → hover `#1D3A58`
-  - `Gold Accent`: `#E5C38E` (statistik/italic serif)
-  - `Border`: `#E5E3DF`
-  - `Muted`: `#6B6B5F` & `#8C8276`
-  - `WhatsApp Green`: `#25D366`
-
-* **Tipografi**:
-  - **Display/Heading**: Cormorant Garamond (serif editorial, italic accent)
-  - **Body/Interface**: Plus Jakarta Sans (sans modern, baseline 16px, line-height 1.6)
-  - `index.html` memuat kedua font via Google Fonts (preconnect).
-
----
-
-### 4. Arsitektur Animasi (Animation Engine)
-
-Semua preset di `src/lib/animations.ts` (aktual — mohon jangan mereferensikan preset lama):
-
-* **Easing Curves**:
-  ```typescript
-  export const LUXURY_EASE = [0.16, 1, 0.3, 1] as const;      // easing utama (reveal/UI)
-  export const EASE_EDITORIAL = [0.77, 0, 0.175, 1] as const;  // mask reveal (editorial)
-  export const EASE_CINEMATIC = [0.65, 0, 0.35, 1] as const;   // gambar cinematic (crossfade/zoom)
-  ```
-* **Pre-trigger Viewport** (margin berbeda — jangan disamaratakan):
-  ```typescript
-  export const viewportConfig = { once: true, margin: '0px 0px 80px 0px', amount: 0.05 }; // Footer fadeInUp
-  ```
-  `Reveal` `-40px` • `MaskReveal` `-30px` • `CinematicImg` `-40px`.
-
-* **Preset Lengkap (aktual)**:
-
-  | Preset | Fungsi |
-  | :--- | :--- |
-  | `fadeInUp` | Opacity 0→1 + y 16→0 (dipakai Footer). |
-  | `microButton` | Hover: scale 1.025 + lift -1.5px. Tap: scale 0.97. |
-  | `navDrawerVariants` | Drawer mobile slide dari kanan (closed x:100%, open x:0). |
-  | `navBackdropVariants` | Opacity backdrop drawer 0→1. |
-  | `navItemStagger` | Stagger item menu: `0.1 + custom * 0.04`. |
-  | `navMenuPanel` | Panel mega-menu navbar: fade + rise 12px (0.55s, `LUXURY_EASE`), `staggerChildren 0.06`, `delayChildren 0.1`; exit cepat 0.2s. |
-  | `navMenuChild` | Anak panel masuk berjenjang (opacity + y12→0, 0.5s). |
-  | `pageTransition` | Transisi antar-route (`AnimatePresence mode="wait"`): exit naik 0.22s, enter fade+rise 22px 0.55s (`LUXURY_EASE`). |
-  | `RevealDir`/`revealVariants` | `up`, `down`, `left`, `right`, `fade`, `zoom`, `blur`. |
-  | `staggerContainer(stagger, delayChildren)` | Container stagger untuk `RevealGroup`. |
-  | `revealTransition(duration)` | Transition anak reveal. |
-
-* **Catatan migrasi**: `LUXURY_SPRING`, `fadeIn`, `fadeInLeft`, `fadeInRight`, `cardStagger`, `microCard`, `microBadge` **tidak ada** di codebase. Jangan dipakai.
-
-* **Reveal system** wrapper (`ui/Reveal.tsx`): `Reveal`/`RevealGroup`/`RevealItem`/`RevealImg` — satu-satunya wrapper scroll-reveal.
-* **Mode Transisi Aman**: `AnimatePresence mode="wait"` untuk pergantian tab & fase form; FAQ pakai animasi height tanpa `mode`.
-
----
-
-### 5. Perintah Skrip & Siklus Pengembangan (NPM Scripts)
-
-```json
-{
-  "scripts": {
-    "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
-    "preview": "vite preview",
-    "clean": "rm -rf dist",
-    "lint": "tsc --noEmit"
-  }
-}
+```bash
+npm run dev       # dev server di http://localhost:3000
+npm run lint      # tsc --noEmit. Harus nol error sebelum dianggap selesai.
+npm run build     # build produksi ke dist/
+npm run preview   # menjalankan hasil build di lokal
+npm run clean     # hapus folder dist/
 ```
 
-* **`npm run dev`**: dev server port `3000`, binding `0.0.0.0`.
-* **`npm run build`**: kompilasi produksi ke `/dist`.
-* **`npm run lint`**: type check statis (`tsc --noEmit`) — **zero error wajib**.
-* **`npm run preview`**: pratinjau build lokal.
-* **`npm run clean`**: hapus direktori `dist` (skrip praktik lintas-shell).
+## Cara kerjanya singkat
+
+Vite berperan sebagai bundler, tapi hasilnya satu SPA murni (React Router, URL bersih tanpa `#`). Semua halaman memakai satu `index.html`. Berhubung SPA, server produksi wajib menangani fallback: permintaan yang tidak dikenal diarahkan ke `index.html`, bukan dibiarkan 404. Detailnya ada di PANDUAN-DEVELOPMENT.md bagian deploy.
+
+Styling memakai Tailwind v4. Aturan font dan warna ada di `src/index.css`: `body` memakai **Plus Jakarta Sans**, judul memakai **Cormorant Garamond** (kelas `.font-serif`). Palet diisi lewat utility arbitrary dengan hex langsung, misal `#F9F8F6` (latar), `#1A1A1A` (teks), `#E5C38E` (aksen emas). Kedua font diambil dari Google Fonts (ada `preconnect` dan `display=swap` di `index.html`), bukan file lokal.
+
+Motion memakai preset yang didefinisikan di `src/lib/animations.ts`. Lenis aktif di awal; fungsi scroll-nya ditampung di `src/lib/scroll.ts` bareng konstanta `HEADER_OFFSET`.
+
+## Sistem desain: quiet luxury
+
+Bahasa visualnya presisi dan tenang. Rules-nya singkat:
+
+- **Presisi.** Grid rapat, siluet bersih, proporsi dijaga. Jangan menambah ornamen tanpa alasan.
+- **Ketenangan.** Palet hangat netral: latar `#F9F8F6`, teks `#1A1A1A`, aksen emas `#E5C38E`. Judul pakai serif mewah (Cormorant Garamond), body pakai sans (Plus Jakarta Sans). Keduanya dari Google Fonts.
+- **Detail manusiawi.** Efek hover ringan, reveal pelan saat scroll. Tanpa gimmick.
+
+Utility custom paling dikenal cuma `no-scrollbar`. Lebar kontainer dan skala heading memakai kelas Tailwind standar.
+
+## Tentang SEO
+
+Ada sebagian infrastruktur SEO yang gampang dilupakan: `SITE_URL` di `src/content/seo.ts` adalah satu-satunya sumber domain, nilainya `https://www.nusaatelier.com`. Semua canonical dan JSON-LD ikut nilai itu, jadi jangan menulis domain mentah di tempat lain. Dari nilai itu juga, `src/lib/useSeo.ts` mengatur title, description, canonical, OG/Twitter, dan injeksi JSON-LD per halaman. Dipanggil otomatis oleh PageLayout.
+
+File `public/robots.txt` dan `public/sitemap.xml` mengikuti. Kalau ada halaman atau produk baru, tambahkan URL-nya ke sitemap.
+
+Repo-nya private: `https://github.com/Asamaludi26/LandingPage2`.
+
+## Kenapa pilihan ini
+
+SPA plus Vite plus Tailwind v4 bikin build kecil dan dev cepat. React Router v7 siap kalau suatu saat butuh data dinamis. Motion sinkron dengan React. Lenis murah meriah. Kombinasi ini yang bikin situs terasa premium tapi tetap ringan.
+
+Kalau butuh cara edit konten atau detail arsitektur, lanjut baca PANDUAN-KONTEN.md dan ARCHITECTURE.md.

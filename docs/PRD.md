@@ -1,180 +1,58 @@
-# Product Requirements Document (PRD)
-## Nusa Atelier — Digital Flagship & Consultation Platform
+# PRD — Nusa Atelier
 
----
+Ini rangkuman produk website Nusa Atelier: siapa targetnya, fitur apa saja yang ada, dan alurnya tinggal gimana. Developer yang mau bekerja di project ini sebaiknya baca dulu, baru lanjut ke ARCHITECTURE.md.
 
-### 1. Ringkasan Eksekutif (Executive Summary)
+Luruskan dari awal: website ini tidak menyimpan data pengguna dan tidak memproses pembayaran. Seluruh penyelesaian transaksi dan reservasi lewat WhatsApp. Karena itu tidak ada backend, login, atau database. Yang dianggap konversi di sini cuma satu: pengunjung mengirim pesan WhatsApp.
 
-**Nusa Atelier** adalah jenama spesialis interior tekstil dan window covering mewah yang telah berkiprah sejak **1992** (32+ tahun pengalaman). Platform digital ini dirancang sebagai *digital flagship showroom* berestetika *quiet luxury*, menghubungkan pemilik properti residensial mewah, desainer interior, serta arsitek dengan layanan kustomisasi gorden, blinds, kain upholstery, wallpaper, furniture custom, dan flooring berstandar internasional.
+## Latar belakang
 
-Platform berperan sebagai **mesin konversi lead (*consultation & lead-generation engine*)**: pengalaman visual elegan, kurasi katalog, pemesanan survei teknis on-site, reservasi kunjungan showroom, hingga komunikasi instan **WhatsApp Concierge**. **Tidak ada backend/database, keranjang, maupun pembayaran.**
+Nusa Atelier bergerak di furnitur dan interior rumah dengan pengerjaan kategori luxury. Website ini jadi semacam gerbang utama yang mengarahkan pengunjung ke WhatsApp untuk semua titik kontak: booking survey, jasa instalasi, konsultasi desain. Bidang utamanya: gorden & blinds, kain upholstery, wallpaper, furnitur custom, dan lantai parquet & karpet wool.
 
----
+Gaya mereknya quiet luxury: tenang, berkelas, subtil. Tidak ada ornamen heboh. Bahasa visual harus meyakinkan tanpa drama berlebihan.
 
-### 2. Visi & Nilai Inti Produk (Product Vision & Core Values)
+Visi jangka panjangnya jadi kiblat desain premium Indonesia, tempat orang yang lagi bangun atau renovasi rumah mewah otomatis kepikiran Nusa Atelier. Saat ini semua orang bersaing di harga; kita bersaing di presisi, siluet, dan kualitas jahitan.
 
-* **Visi**: Menjadi destinasi rujukan utama di Indonesia untuk solusi window fashion dan tekstil interior mewah dengan standar kurasi kelas dunia dan presisi pengerjaan *haute couture*.
-* **Nilai Inti**:
-  1. **Timeless Elegance**: Desain visual tenang, lapang, berkelas tanpa ornamen berlebih (*quiet luxury*).
-  2. **Artisan Craftsmanship**: Workshop dan atelier in-house dengan penjahit berpengalaman lebih dari 20 tahun.
-  3. **End-to-End Precision**: Layanan tuntas — survei on-site, konsultasi sampel kain gratis, instalasi rapi, garansi mekanisme 1–5 tahun.
-  4. **Frictionless Consultation**: Interaksi pengguna yang mulus — reservasi kunjungan terkirim dalam hitungan detik via WhatsApp.
+Definisi "End-to-End" di sini: semua kebutuhan furnitur dari gorden sampai parket beres di satu pintu.
 
----
+## Buat siapa
 
-### 3. Target Audiens & Persona Pengguna (Target Audience & Personas)
+1. **Dekorator profesional.** Butuh material gorden/karpet premium buat nawarin klien, plus vendor yang bisa diandalkan. Yang dia cari di website: bukti kredibilitas (umur perusahaan, galeri, pencapaian), kontak yang cepat ke WhatsApp, detail material yang jelas. Problemnya selama ini: vendor tidak konsisten, hasil tidak sesuai janji, komunikasi lambat.
 
-#### Persona A: Pemilik Residensial Mewah / Penthouse (*High-Net-Worth Individuals*)
-* **Profil**: Pemilik rumah di kawasan elite (Pondok Indah, Menteng, PIK, BSD, Pakubuwono) dengan jendela void tinggi atau penthouse modern.
-* **Kebutuhan**: Gorden bermotor (*smart motorized*), insulasi panas/cahaya maksimal, vitrase linen murni Eropa, privasi tinggi, layanan survei ke lokasi.
-* **Pain Point**: Sulit menemukan vendor yang mampu menangani jendela void raksasa dengan jahitan sempurna dan rel motor terintegrasi smart home.
+2. **Pemilik rumah mewah.** Mau melengkapi atau menata interior (area nonton, dapur, kamar anak, ruang tamu) tanpa ribet. Dia butuh rasa yakin dari visual, kejelasan layanan satu atap, dan jalan pintas ke konsultasi. Yang ditakutkan: salah pilih material, pelayanan ribet, kualitas tidak sebanding harga.
 
-#### Persona B: Desainer Interior & Konsultan Arsitektur
-* **Profil**: Praktisi interior design studio yang menangani proyek residensial mewah atau boutique hospitality.
-* **Kebutuhan**: Akses katalog sampel kain masif (10.000+ varian), spesifikasi teknis bahan (fire-retardant, acoustic, eco-certified), dukungan fabrikasi custom dan CMT.
-* **Pain Point**: Keterbatasan variasi tekstil lokal, sampel fisik lambat, vendor tanpa workshop sendiri.
+3. **Profesional sibuk.** Orang tipe "semua beres, saya tinggal lihat hasil". Dia butuh kesan segalanya bisa diurus di sini, kontak yang mudah, dan sesedikit mungkin isian form. Sifatnya anti ditelpon sales dan malas bolak-balik ngejelasin kebutuhan.
 
-#### Persona C: Pengelola Properti Komersial & Hospitality
-* **Profil**: General Manager/Project Director hotel butik, restoran fine-dining, kantor korporat prestisius.
-* **Kebutuhan**: Ketahanan material commercial heavy-duty, efisiensi biaya wholesale/B2B, sertifikasi keamanan api, ketepatan waktu instalasi.
+## Fitur yang ada
 
----
+**Beranda.** Hero dengan headline, subheadline, dan tombol WhatsApp. Setelah hero langsung section Tentang (tetap di beranda). Terus Koleksi Produk dengan filter kategori, End-to-End, kartu Showroom, Testimoni, dan FAQ. Pelan-pelan, satu alur.
 
-### 4. Lingkup Fitur & Spesifikasi Fungsional (Functional Requirements)
+**Koleksi & filter.** Grid produk dengan menu kategori (Semua plus 6 kategori). Saat kategori dipilih, grid ikut menyaring dan halaman scroll pelan ke grid produk. Semua kartu produk punya tombol WhatsApp.
 
-#### 4.1. Header & Sticky Navigation
-* **Top bar**: alamat showroom, jam operasional, badge *"Survei Bebas Biaya"*, quick dial telepon, dan tautan WhatsApp.
-* **Menu navigasi**: Beranda `#beranda`, Tentang `#tentang-kami`, Koleksi `#koleksi-produk`, Layanan `#layanan`, Showroom `#showroom`, FAQ `#faq`. Hanya item **Koleksi** & **Layanan** yang memakai **mega menu**.
-* **Dropdown Koleksi**: indeks section halaman tujuan → `/koleksi-produk` (Koleksi & Produk Eksklusif), `/koleksi-produk#koleksi-spesialisasi` (Spesialisasi Kami), `/koleksi-produk#katalog-lengkap` (Katalog Lengkap) — deep-link membuka halaman dengan filter aktif + auto-scroll.
-* **Dropdown Layanan**: indeks section halaman `/layanan` → `/layanan` (top), `#layanan-ikhtisar`, `#layanan-ruang-lingkup`, `#layanan-proses`, `#layanan-khusus`, `#layanan-garansi`, `#layanan-galeri`.
-* **Showroom & FAQ**: tautan anchor polos (tanpa dropdown) — smooth-scroll ke `#showroom` / `#faq`, dengan hash section tersinkron ke address bar (`/#showroom`).
-* **Action CTAs**: tombol *Reservasi Showroom* (membuka modal reservasi global).
-* **Navigasi lintas halaman**: di halaman lain, klik anchor → pindah ke home dengan smooth-scroll ke section target (`location.state.scrollTo`) lalu hash ditampilkan di address bar.
-* **Mobile drawer**: drawer layar penuh dengan animasi slide, staggered link, sub-menu accordion (expand/collapse) hanya untuk Koleksi & Layanan, focus trap, dan kunci scroll latar.
+**Halaman dalam.** Ada empat: Tentang (`/tentang-kami`), Koleksi (`/koleksi-produk`), Detail produk (`/koleksi-produk/:productId`), dan Layanan (`/layanan`). Halaman Tentang menyisipkan narasi perusahaan dengan timeline dari 1992 sampai sekarang, cerita workshop, standar kualitas, divisi grosir, dan pilar brand. Halaman detail produk: galeri, box info, deskripsi, spesifikasi, dan tombol WhatsApp.
 
-#### 4.2. Hero Section (Slideshow)
-* **Visual**: slideshow otomatis 3 slide (7 detik) dengan crossfade cinematic, zoom halus, swipe (pointer), dan indikator dots.
-* **Headline & CTA per slide**: kicker, headline 2-baris + accent italic, deskripsi, 2 CTA — *WhatsApp* (primary, pre-filled pesan) & *Jelajahi Koleksi* (smooth-scroll ke `#koleksi-produk`).
-* Autoplay berhenti saat hover/drag/keluar viewport.
+**Reservasi showroom.** Dari kartu Showroom ada tombol buka modal. Isinya nama, WhatsApp, email, tanggal, pilihan lokasi (Showroom Senopati / Studio Menteng), dan catatan bebas. Tombol kirim membuka WhatsApp dengan ringkasan data yang sudah diformat rapi. Kalau WhatsApp gagal kebuka (limit/izin), ada jalan alternatif: isi ulang form, telepon showroom, atau email. Kasus ini jarang terjadi, tapi disiapkan.
 
-#### 4.3. Tentang Kami (About Section)
-* **Tab Switcher interaktif** (sliding indicator `layoutId`):
-  1. *Kisah Sejak 1992*: sejarah, visi kurasi, filosofi, pilar kualitas.
-  2. *Workshop & Atelier*: workshop in-house, teknik blind-stitch, checklist kapabilitas.
-  3. *Distributor & Wholesale*: layanan khusus desainer, arsitek, kontraktor (B2B).
-* **3 pilar nilai**: penghargaan/sertifikasi, ketepatan, dedikasi — dengan hover lift.
-* Transisi konten tab anti-tumpang tindih (`AnimatePresence mode="wait"`).
+**WhatsApp concierge.** Tombol WhatsApp ada di header, di mayoritas section, di tiap produk, dan di halaman detail. Semuanya ngarah ke satu nomor: `62812-3456-7890` (cek: ini placeholder). Kode menyimpan nomor dalam bentuk teracak agar crawler tidak gampang menelusuri; filenya `src/lib/wa.ts`. Saat nomor asli siap, ganti di situ aja.
 
-#### 4.4. Katalog & Filter Koleksi (Product Categories)
-* **6 kategori produk** + filter *Semua*:
-  1. **Gorden** (double drapery, French pleat, ripple fold, sheer).
-  2. **Blinds** (roller, venetian wood, honeycomb, motorized Somfy/Tuya).
-  3. **Kain** (beludru Belgia, jacquard, boucle, linen, microfiber).
-  4. **Wallpaper** (grasscloth alami, metallic foil, silk wallcovering).
-  5. **Furniture** (sofa custom, headboard, credenza, rangka kayu solid).
-  6. **Flooring** (engineered oak, karpet tenun wool).
-* **Kartu produk**: gambar bersih, nama, subtitle, deskripsi, badge material (maks 2 + `+N lainnya`).
-* **Aksi**: *Detail Bahan* → halaman detail produk; *Reservasi Kunjungan* → buka modal reservasi.
-* Filter dinamis dengan animasi layout (`motion layout` + `AnimatePresence`).
+## Hal non-fungsional
 
-#### 4.5. Halaman Detail Produk (Product Detail Page)
-Rute `#/koleksi-produk/:productId` (bukan modal).
-* **Breadcrumb** kategori navigable; **hero** gambar utama `CinematicImg` + judul, deskripsi, CTA *Reservasi* & *Pesan Sampel via WhatsApp*.
-* **Galeri**: pilih gambar (thumb desktop / strip geser mobile), gambar besar cinematic.
-* **Spesifikasi `dl`**: baris label–nilai (bahan, dimensi, aksesoris, garansi, dst).
-* **Quick facts**: estimasi produksi 7–21 hari, garansi 1–5 tahun, survei gratis, customizable.
-* **Komposisi material** grid + fitur + callout rekomendasi ruangan (`popularFor`) + callout craftsmanship.
-* **Slider "Semua Produk"**: korsel infinite (wrap seamless) dengan navigasi prev/next & swipe.
-* **Cara Memesan** (4 langkah): konsultasi WA → survei → produksi → instalasi + garansi.
-* Product tidak ditemukan → redirect ke `/koleksi-produk`.
-* Penutup section: CTABand → Showroom → Testimonials → FAQ.
+- **Performa.** SPA yang ringan, asset gambar lokal di `/public`. Font dimuat dari Google Fonts dengan preconnect agar tidak memperlambat render teks.
+- **Animasi.** Halus tapi tidak berlebihan. Reveal pelan saat scroll, header berubah buram, mega menu beranimasi, efek teks di hero. Tidak ada animasi gimmick yang mengganggu.
+- **Responsif.** Nyaman di desktop dan ponsel. Navigasi di ponsel pakai drawer terpisah, grid jadi tumpukan, mega menu berubah jadi accordion.
+- **Aksesibilitas.** Bisa dioper lewat keyboard, ada `aria-label` di elemen penting, alt text gambar deskriptif, dan setiap halaman cuma punya satu `<h1>`.
+- **Keamanan.** Tidak ada secret di repo. Nomor WhatsApp diobfuscate di kode.
 
-#### 4.6. Alur Layanan End-to-End (End-to-End Service Flow)
-Grid 4 tahap (`WORKFLOW_STEPS`, ikon dipetakan di komponen):
-1. *Konsultasi & Kurasi Material* — diskusi konsep, kurasi sampel 10.000+.
-2. *Survei On-Site* — pengukuran presisi dengan peralatan laser.
-3. *Craftsmanship* — pemotongan & penjahitan manual berstandar bespoke.
-4. *Instalasi Bersih & Garansi* — pemasangan rapi + garansi resmi.
-Plus 2 callout: segmen **Residensial** (CTA reservasi) & **Arsitek/Desainer** (CTA WhatsApp B2B).
-CTA *"Jelajahi Seluruh Layanan Secara Lengkap"* → halaman `#/layanan`.
+## Ukur keberhasilan
 
-#### 4.6b. Halaman Detail Layanan (Services Page — `/layanan`)
-Halaman dalam dengan pola yang sama seperti `/tentang-kami` & `/koleksi-produk`, dijangkau dari CTA section `#layanan` di beranda dan tautan footer.
-* **PageHero**: breadcrumb *Layanan*, CTA Reservasi.
-* **Ikhtisar**: narasi *satu atap* sejak 1992 + 3 kartu stat (garansi 1–5 tahun, estimasi 7–21 hari, 10.000+ sampel kain).
-* **4 Lini Layanan**: Gorden & Window Fashion, Blinds & Window Shades, Upholstery & Custom Furniture, Wallpaper & Flooring — tiap lini 3 poin ceklis rinci.
-* **4 Tahap Proses (deep dive)**: setiap tahap dari `WORKFLOW_STEPS` diperluas dengan 4 detail penuh (baris bolak-balik + gambar).
-* **Layanan Khusus**: survei rumah gratis, skema trade/B2B, komersial & hospitality, motorized & smart home.
-* **Garansi & Purnajual**: kartu garansi, dry-clean, perawatan/pemindahan rel, after-sales responsif + CTA WhatsApp garansi.
-* **Galeri Realisasi**: slider 6 foto proyek (crossfade cinematic + settle), navigasi panah prev/next, counter, swipe, dan strip thumbnail untuk memilih foto — sebagai bukti profesionalitas.
-* Penutup: CTABand → Showroom → Testimonials → FAQ.
+Patokannya satu: pesan WhatsApp. Yang dipantau: klik tombol WA dari mana saja (filter, kartu, halaman detail, header, showroom, FAQ), pesan yang benar-benar terkirim, dan spamming kolom nama.
 
-#### 4.7. Galeri Showroom Fisik (Showrooms Section)
-* **2 showroom** (tab switching, sliding indicator):
-  1. **Showroom Fatmawati** (Jakarta Selatan) — galeri sampel kain, display sistem motorized, ruang konsultasi arsitek.
-  2. **Showroom Pintu Air** (Jakarta Pusat) — tekstil wholesale & retail, koleksi kain klasik, konsultasi proyek besar.
-* **Informasi**: badge distrik, nama, alamat, jam operasional, telepon `tel:`, fasilitas (grid ikon), peta interaktif (iframe) + tautan Google Maps.
-* **CTA Reservasi Kunjungan** membuka modal reservasi **untuk showroom yang dipilih** (state lokal section).
+Sisi teknis: LCP di bawah 2,5 detik, CLS di bawah 0,1, ukuran bundle gzip di bawah 170 KB (perkiraan). Angka ini realistis karena SPA + Tailwind v4 memang ringan tanpa mengubah pengalaman pengguna.
 
-#### 4.8. Modal Reservasi Showroom (Showroom Reservation Modal)
-* **Formulir**: nama, no. WhatsApp (prefix `+62`, auto-format `3-4-4`, validasi `8xxxxxxxxxx`, batas merah + pesan error), tanggal kunjungan (`min` hari ini) & slot waktu (09.00–17.00 WIB tiap 30 menit).
-* **Anti-bot**: honeypot tersembunyi + timestamp minimal buka form (2.5 detik).
-* **Preview WhatsApp**: fase konfirmasi menampilkan simulasi chat WhatsApp realistis (header, bubble, detail reservasi — nama, no. WA, showroom, alamat, tanggal format Indonesia, waktu).
-* **Kirim**: tombol hijau membuka `wa.me` dengan pesan pre-filled; opsi *Edit Data* kembali ke form.
-* Modal global membuka showroom default `SHOWROOMS_DATA[0]`; section showroom membuka versi lokal per-cabang.
+## Di luar cakupan
 
-#### 4.9. Testimonial & Bukti Sosial (Testimonials)
-* 3 kartu testimoni (quote, 5 bintang, avatar, nama, peran, lokasi, tipe proyek).
-* **Banner Arsitek Partner**: callout peminjaman katalog sampel material dengan CTA WhatsApp.
-
-#### 4.10. Tanya Jawab Terstruktur (FAQ Section)
-* Accordion 6 pertanyaan (biaya survei, durasi fabrikasi, proyek luar kota, sistem smart home, CMT, garansi). Item pertama terbuka default; animasi height halus.
-* Penutup: CTA WhatsApp.
-
-#### 4.11. Floating WhatsApp Concierge
-* **FAB** hijau `#25D366` kanan-bawah; membuka quick-chat box: header brand, kartu sapaan, **4 pesan cepat** pre-filled (konsultasi, katalog, reservasi, harga), footer CTA *Buka Percakapan WhatsApp*.
-* Semua aksi WA dilindungi **guard anti-spam** (interval 3 detik & maks 5 bukaan/sesi).
-
-#### 4.12. Modal Global & State Terpusat (Cross-cutting)
-* `PageActionsContext` (`PageLayout`) menyediakan `openReservation()` — dipakai Header, Footer, PageHero, CTABand, ProductCategories, EndToEndService, dan seluruh halaman.
-* Navigasi anchor homogen: halaman aktif → `smoothScrollTo`; halaman lain → `navigate('/', { state: { scrollTo } })`.
-
----
-
-### 5. Kebutuhan Non-Fungsional (Non-Functional Requirements)
-1. **Performa & Kecepatan Muat**:
-   - Lazy-loading halaman non-home (`React.lazy` + `Suspense fallback`).
-   - Preload gambar slide tetangga Hero.
-   - Aset visual rasio aspek terkontrol untuk mencegah *layout shift*.
-2. **Kualitas Animasi & Interaksi**:
-   - Kurva easing *quiet luxury* (`LUXURY_EASE [0.16,1,0.3,1]`, `EASE_EDITORIAL`, `EASE_CINEMATIC`).
-   - Smooth-scrolling Lenis (momentum inertial).
-   - Tanpa overlap visual pada pergantian tab/form (`AnimatePresence mode="wait"`).
-3. **Responsivitas Perangkat**:
-   - Kompatibel 360px+ hingga ultrawide/4K; touch target minimal 44×44px; horizontal scroll pakai `no-scrollbar`.
-4. **Aksesibilitas & Tipografi**:
-   - WCAG AA untuk kontras teks; hiеrarki jelas: display serif (Cormorant Garamond) + body sans (Plus Jakarta Sans).
-   - Modal: `role="dialog" aria-modal`, fokus trap + restore, Escape-close, aria-label pada tombol ikon.
-5. **Keamanan & Validasi**:
-   - Validasi klien pada nomor WhatsApp (regex `8xxxxxxxxxx`) & email.
-   - Anti-bot: honeypot + deteksi waktu isi form.
-   - Sanitasi semua pesan WA dengan `encodeURIComponent`; nomor WA tidak ditulis plaintext di source (obfuscated).
-
----
-
-### 6. Metrik Keberhasilan (Success Metrics / KPIs)
-* **Tingkat Konversi Lead**: persentase pengunjung yang menyelesaikan reservasi / permintaan katalog via WhatsApp (> 4.5%).
-* **Durasi Sesi Pengguna**: rata-rata waktu jelajah (> 2 menit 30 detik).
-* **Engagement Katalog**: interaksi filter kategori & klik halaman detail produk (≥ 35% pengunjung unik).
-* **Kepuasan Aksesibilitas**: zero rendering error lintas browser (Chrome, Safari iOS, Edge, Firefox).
-* **Kualitas Build**: `npm run lint` (tsc) zero error sebelum deploy.
-
----
-
-### 7. Tidak Termasuk Lingkup (Out of Scope / Non-Goals)
-Fitur yang TIDAK ada di produk saat ini dan bukan target pengembangan:
-- **Interactive Estimator (kalkulator biaya)**.
-- **Consultation Modal terpisah** (digantikan ShowroomReservationModal).
-- **Product Detail Modal** (digantikan halaman detail penuh `/koleksi-produk/:id`).
-- Item navigasi "Estimasi Biaya".
-- E-commerce, keranjang, pembayaran, akun pengguna, backend/database.
+- E-commerce, checkout, integrasi payment.
+- Login, wishlist, akun pengguna.
+- Bahasa asing / terjemahan penuh (i18n).
+- SEO dinamis dari CMS. Sekarang statis, dikelola lewat `src/content/seo.ts` dan `public/sitemap.xml`.
+- Integrasi feed Instagram.
+- Tombol "follow us" yang mencolok. Sengaja dilewati supaya desain tetap bersih.

@@ -5,7 +5,7 @@ export const SITE_INFO = {
   experienceYears: '32+',
   projectsCount: '1.800+',
   fabricCount: '10.000+',
-  phoneGeneral: '+62 21 750 4911',
+  phoneGeneral: '+62 21 555 0172',
   email: 'info@nusaatelier.com',
   instagram: '@nusaatelier.id',
   operationalHours: 'Senin - Sabtu: 09.00 - 18.00 WIB',
@@ -33,7 +33,7 @@ export interface NavLink {
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'Beranda', href: '#beranda', type: 'anchor' },
-  { label: 'Tentang', href: '#tentang-kami', type: 'anchor' },
+  { label: 'Tentang', href: '/tentang-kami', type: 'route' },
   {
     label: 'Koleksi',
     href: '#koleksi-produk',
@@ -127,7 +127,7 @@ export const LOGO = {
 };
 
 export const TOPBAR = {
-  showroomLine: 'Showroom: Fatmawati & Pintu Air Jakarta',
+  showroomLine: 'Showroom: Senopati & Menteng Jakarta',
   freeSurveyLabel: 'Survei Bebas Biaya',
   waMessage: 'Halo Nusa Atelier, saya tertarik untuk konsultasi interior',
 };
@@ -139,7 +139,7 @@ export const HEADER_CTA = {
 
 export const DRAWER = {
   contactsTitle: 'Kontak & Info',
-  showroomLine: 'Showroom: Fatmawati & Pintu Air Jakarta',
+  showroomLine: 'Showroom: Senopati & Menteng Jakarta',
   waMessage: 'Halo Nusa Atelier, saya tertarik konsultasi',
   reserveLabel: 'Reservasi Kunjungan Showroom',
 };
@@ -179,14 +179,14 @@ export const FOOTER = {
   showroomsTitle: 'Galeri Showroom Jakarta',
   showrooms: [
     {
-      name: 'Showroom Fatmawati (Jakarta Selatan)',
-      address: 'Jl. RS Fatmawati No. 5A-D, Kebayoran Baru',
-      phone: 'Telp: (021) 750 4911',
+      name: 'Showroom Senopati (Jakarta Selatan)',
+      address: 'Jl. Senopati No. 21A, Kebayoran Baru',
+      phone: 'Telp: (021) 555 0172',
     },
     {
-      name: 'Heritage Studio (Jakarta Pusat)',
-      address: 'Jl. Pintu Air Raya No. 34, Pasar Baru',
-      phone: 'Telp: (021) 384 7228',
+      name: 'Studio Menteng (Jakarta Pusat)',
+      address: 'Jl. HOS Cokroaminoto No. 12, Menteng',
+      phone: 'Telp: (021) 555 0173',
     },
   ],
   reserveLabel: 'Reservasi Kunjungan Showroom',

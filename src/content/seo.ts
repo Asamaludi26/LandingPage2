@@ -15,11 +15,11 @@ export const SEO_SITE = {
   ogImageWidth: 1200,
   ogImageHeight: 630,
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-  phone: '+62 21 750 4911',
+  phone: '+62 21 555 0172',
   email: 'info@nusaatelier.com',
   instagramUrl: 'https://www.instagram.com/nusaatelier.id',
   address: {
-    streetAddress: 'Jl. RS Fatmawati No. 5A-D, Kebayoran Baru',
+    streetAddress: 'Jl. Senopati No. 21A, Kebayoran Baru',
     addressLocality: 'Jakarta Selatan',
     addressRegion: 'DKI Jakarta',
     addressCountry: 'ID',

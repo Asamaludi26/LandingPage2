@@ -70,7 +70,7 @@ export const WHATSAPP_FLOAT = {
     'Halo, saya ingin menjadwalkan survei gratis di rumah saya.',
     'Halo, saya ingin konsultasi pemilihan gorden untuk apartemen.',
     'Halo, apakah saya bisa minta pricelist kain upholstery sofa?',
-    'Halo, saya ingin menanyakan jam buka showroom Fatmawati.',
+    'Halo, saya ingin menanyakan jam buka showroom Senopati.',
   ],
   openChatLabel: 'Buka Percakapan WhatsApp',
   defaultMessage: 'Halo Nusa Atelier, saya ingin berkonsultasi',
@@ -103,14 +103,14 @@ export const ABOUT_SECTION = {
     quoteLabel: 'Filosofi Kami',
     timelineLabel: 'Lini Masa',
     timeline: [
-      { year: '1992', text: 'Atelier pertama dibuka di Pintu Air, Jakarta Pusat.' },
-      { year: '2008', text: 'Showroom flagship Jl. RS Fatmawati dengan galeri sampel terlengkap.' },
+      { year: '1992', text: 'Atelier pertama dibuka di Menteng, Jakarta Pusat.' },
+      { year: '2008', text: 'Showroom flagship kawasan Senopati dengan galeri sampel terlengkap.' },
       { year: '2018', text: 'Divisi motorized & smart home — mitra resmi Somfy dan Dooya.' },
       { year: 'Sekarang', text: 'Jaringan distribusi grosir hingga Singapura & Malaysia.' },
     ],
     image: {
       src: '/assets/unsplash-1616046229478-9901c5536a45.jpg',
-      alt: 'Showroom Heritage Nusa Atelier Fatmawati',
+      alt: 'Showroom Heritage Nusa Atelier Senopati',
     },
     imageDetail: {
       src: '/assets/unsplash-1513694203232-719a280e022f.jpg',
@@ -125,7 +125,7 @@ export const ABOUT_SECTION = {
   story: {
     title: 'Menghidupkan Jiwa Ruangan Melalui Karakter Bahan & Kehangatan Desain',
     paragraphs: [
-      'Sejak pembukaan gerai pertama di Pintu Air hingga ekspansi showroom utama di Jalan RS Fatmawati, kami telah dipercaya oleh ribuan pemilik rumah tinggal, arsitek ternama, kedutaan besar, hingga jaringan hotel bintang lima di Indonesia.',
+      'Sejak pembukaan gerai pertama di Menteng hingga ekspansi showroom utama di kawasan Senopati, kami telah dipercaya oleh ribuan pemilik rumah tinggal, arsitek ternama, kedutaan besar, hingga jaringan hotel bintang lima di Indonesia.',
     ],
     points: [
       'Kurasi langsung dari pabrik tekstil Belgia, Italia, Spanyol, dan Turki.',
@@ -140,7 +140,7 @@ export const ABOUT_SECTION = {
     images: [
       {
         src: '/assets/unsplash-1616046229478-9901c5536a45.jpg',
-        alt: 'Showroom Nusa Atelier Fatmawati',
+        alt: 'Showroom Nusa Atelier Senopati',
       },
       {
         src: '/assets/unsplash-1586023492125-27b2c045efd7.jpg',

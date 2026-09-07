@@ -1,7 +1,7 @@
-const ENC_DIRECT = '3958956456235';
-const ENC_DISPLAY = '+39 589-5645-6235';
+const ENC_DIRECT = '3958901234567';
+const ENC_DISPLAY = '+39 589-0123-4567';
 
-const SESSION_KEY = 'hd_wa_open';
+const SESSION_KEY = 'na_wa_open';
 
 export const WA_DIRECT = ENC_DIRECT.replace(/\d/g, (d) => String((Number(d) + 3) % 10));
 export const WA_DISPLAY = ENC_DISPLAY.replace(/\d/g, (d) => String((Number(d) + 3) % 10));
@@ -34,7 +34,7 @@ let lastOpenedAt = 0;
  * Kirim event feedback global agar UI menampilkan pesan alih-alih "bisu".
  * Komponen apa pun (toast global, dsb.) bisa mendengarkan via `watchWaLimit`.
  */
-export const WA_LIMIT_EVENT = 'hd:wa-limit';
+export const WA_LIMIT_EVENT = 'na:wa-limit';
 
 export interface WaLimitPayload {
   reason: 'cooldown' | 'exhausted';

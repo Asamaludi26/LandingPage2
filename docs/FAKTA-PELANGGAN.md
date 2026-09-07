@@ -1,155 +1,75 @@
-# Fakta Pelanggan — Nusa Atelier
+# Fakta Pelanggan Nusa Atelier
 
-> Dokumen ini adalah **sumber rujukan komunikasi** untuk Project Manager & tim saat menyampaikan detail ke pelanggan.
-> Seluruh data di bawah **sudah diverifikasi dari kode sumber** (`src/content/*.ts`) dan konsisten dengan website.
-> **Kalau ada selisih antara dokumen ini dan website, yang benar adalah `src/content/*.ts`** — perbarui dokumen ini langsung setelah konten diubah.
+Catatan singkat buat tim yang bicara dengan pelanggan (admin, PM, konsultan). Ini yang disepakati soal brand, produk, layanan, dan sejarah. Dipakai juga sebagai patokan kalau ada pertanyaan yang jawabannya harus konsisten.
 
----
+## Data kontak sekarang masih placeholder
 
-## 1. Identitas Perusahaan
+Ini penting: nomor telepon, WhatsApp, dan alamat showroom yang tampil di website belum data asli. Angkanya dibuat acak supaya pengunjung tidak mengira itu kontak sungguhan dan crawler tidak bisa mengumpulkan data lama. Ringkasannya:
 
-| Item | Nilai |
+- WhatsApp: `62812-3456-7890` (placeholder)
+- Telepon general & Showroom Senopati: `+62 21 555 0172` (placeholder)
+- Telepon Studio Menteng: `+62 21 555 0173` (placeholder)
+- Alamat kedua lokasi di bawah juga perumahan fiktif.
+
+Jadi jangan membagikan nomor-nomor itu sebagai kontak resmi. Nanti bisa diganti di `src/lib/wa.ts`, `src/content/layout.ts`, `src/content/showrooms.ts`, dan `src/content/seo.ts`.
+
+## Identitas
+
+- Nama brand: **Nusa Atelier**. Slogan yang dipakai: "Nusa Atelier, Karya Kami, Ketenangan Anda." Slogan lama "Karya Angkasa, Ketenangan Anda" tidak dipakai lagi.
+- Nama resmi: PT Nusa Atelier.
+- Monogram di favicon: **NA**.
+- Email: `info@nusaatelier.com`
+- Instagram: `@nusaatelier.id`
+- Domain rencana: `https://www.nusaatelier.com` (nilai `SITE_URL` di `src/content/seo.ts`)
+
+## Sejarah
+
+Ulasan singkatnya begini. Dimulai di Menteng, Jakarta, tahun 1992 sebagai atelier pembuat gorden dan jok kursi. Tahun 2008 membuka showroom flagship di kawasan Senopati dan dari situlah lokasi ini dikenal. 2018 masuk divisi motorisasi (mitra resmi Somfy dan Dooya). Sekarang jaringan distribusi grosirnya sampai Singapura dan Malaysia.
+
+Di website, angka-angka publik yang dipakai: pengalaman 32+ tahun, 1.800+ proyek selesai, lebih dari 10.000 sampel kain dunia.
+
+## Produk
+
+Ada 9 produk yang tayang, tersebar di 6 kategori. Daftarnya sesuai data live (`src/content/products.ts`):
+
+| Produk | Kategori |
 | :--- | :--- |
-| Nama | **Nusa Atelier** |
-| Tagline | Solusi Interior & Tekstil Mewah Berkelas Sejak 1992 |
-| Berdiri sejak | **1992** (pengalaman **32+ tahun**) |
-| Proyek ditangani | **1.800+** |
-| Koleksi sampel kain | **10.000+** (impor & lokal) |
-| Workshop | **In-house / atelier sendiri di Jakarta** — tanpa perantara pengerjaan |
-| Status | Melayani residensial mewah, arsitek/desainer, komersial/hospitality, dan grosir tekstil |
+| Gorden Ripple Fold & Vitrase Sheer Linen | Gorden & Vitrase |
+| Gorden French Pleat Klasik Eksklusif | Gorden & Vitrase |
+| Motorized Wooden Venetian Blinds | Blinds & Window Shades |
+| Silhouette & Shangri-La Window Shades | Blinds & Window Shades |
+| Kain Upholstery Textured Bouclé & Chenille | Kain Upholstery & Sofa |
+| Kulit Asli Italian Full Grain & Aniline | Kain Upholstery & Sofa |
+| Exclusive Silk & Textured Fabric Wallcovering | Wallpaper & Wallcovering |
+| Bespoke Custom Curved Sofa & Credenza | Custom Furniture |
+| Lantai Kayu Parquet Herringbone & Karpet Wool | Lantai Parquet & Karpet |
 
-**Kanal kontak**
-- Telepon: **+62 21 750 4911**
-- Email: **info@nusaatelier.com**
-- Instagram: **@nusaatelier.id**
-- WhatsApp: via tombol melayang di kanan-bawah website (konsultan online)
-- Jam operasional: **Senin – Sabtu, 09.00 – 18.00 WIB** (Minggu menyesuaikan per showroom)
+Perhatian: data produk tidak menyimpan harga. Semua harga disepakati lewat WhatsApp setelah penyesuaian ukuran dan material. Jadi kalau ada yang menanyakan harga di website, arahkan ke konsultasi.
 
----
+## Layanan
 
-## 2. Showroom (2 Lokasi)
+- Gorden & blinds custom: konsultasi, survei & pengukuran, penjahitan, pemasangan.
+- Upholstery sofa & reupholstery (termasuk kulit Italian).
+- Wallcovering / wallpaper tekstil.
+- Furniture custom (sofa, kursi, headboard) dengan rangka kayu solid.
+- Lantai parquet & karpet wool.
+- Binis grosir kain untuk toko dan desainer, plus kolaborasi arsitek (B2B).
 
-### A. Showroom Fatmawati — Jakarta Selatan
-- **Alamat:** Jl. RS Fatmawati No. 5A–D, Gandaria Utara, Kebayoran Baru, Jakarta Selatan 12140
-- **Jam:** Senin – Sabtu 09.00–18.00 | Minggu: **dengan janji temu**
-- **Telepon:** +62 21 750 4911
-- **Fasilitas:** koleksi sampel kain terlengkap (10.000+), display sistem motorized blinds & gorden, ruang konsultasi arsitek & desainer, area parkir luas & valet tamu
+Semua layanan diarahkan lewat WhatsApp. Survei dan pengukuran on-site gratis di area Jabodetabek.
 
-### B. Heritage Studio Pintu Air — Jakarta Pusat
-- **Alamat:** Jl. Pintu Air Raya No. 34–36, Pasar Baru, Sawah Besar, Jakarta Pusat 10710
-- **Jam:** Senin – Sabtu 09.00–17.30 | Minggu: **tutup**
-- **Telepon:** +62 21 384 7228
-- **Fasilitas:** divisi tekstil wholesale & retail, koleksi kain sutra/jacquard/damask klasik, workshop penjahitan & custom upholstery, konsultasi proyek berskala besar
+## Showroom dan studio
 
-> Reservasi kunjungan dilakukan lewat website (modal *Reservasi Showroom*) → konfirmasi via WhatsApp. Survei rumah Jabodetabek gratis.
-
----
-
-## 3. Layanan Inti (4 Lini)
-
-1. **Gorden & Window Fashion** — French Pleat klasik, Ripple-Fold modern, vitrase sheer linen Eropa; double drapery + lining blackout; rel premium, curtain box, void hingga **6 meter tanpa sambungan**; kompatibel motorized & smart home.
-2. **Blinds & Window Shades** — Wooden Venetian (slat basswood **50 mm**, 18 pilihan urat kayu), Silhouette & Shangri-La, roller blinds, honeycomb; kontrol remote/aplikasi/smart home (Somfy, Dooya); instalasi jendela lengkung, skylight, bi-folding door.
-3. **Upholstery & Custom Furniture** — sofa custom, reupholstery, headboard, kursi makan; bouclé s.d. kulit full-grain Italia; rangka jati/mahoni dry-kiln + spring baja + busa HR; layanan **CMT** (cut, make & trim) untuk kain milik klien.
-4. **Wallpaper & Flooring Kustom** — wallcovering sutra & grasscloth **seamless**; lantai parquet engineered oak (herringbone/chevron); karpet hand-tufted wol New Zealand; fire-retardant Class A, bebas VOC, akustik nyaman, aman untuk underfloor heating.
-
-### Layanan Khusus (4)
-- **Kunjungan survei rumah gratis** (Jabodetabek) — konsultan membawa ratusan sampel kain.
-- **Skema Trade & B2B profesional** — mitra arsitek IAI & desainer HDII; peminjaman sample book; harga khusus bertingkat.
-- **Proyek komersial & hospitality** — hotel butik, restoran fine-dining, kedutaan, kantor korporat; material commercial heavy-duty + sertifikasi api.
-- **Motorized & smart home** — authorized partner **Somfy** (Prancis) & **Dooya**; integrasi Apple HomeKit, Google Home, Control4.
-
----
-
-## 4. Proses Kerja (4 Tahap — End-to-End)
-
-1. **Konsultasi & kurasi material** — diskusi konsep (di showroom atau via WhatsApp, kirim denah/foto), kurasi 10.000+ sampel, rekomendasi fungsi (blackout/sheer/thermal/acoustic/fire-retardant), persetujuan konsep + estimasi anggaran.
-2. **Survei on-site & pengukuran presisi** — gratis Jabodetabek, tim membawa koper katalog kain; ukur laser (lebar, tinggi void, levelling, jalur kelistrikan motor); **penawaran transparan di hari yang sama**.
-3. **Craftsmanship di workshop in-house** — penjahitan manual oleh master tailor 20+ tahun; steam shaping, weighted hem & lead tape; rangka custom kayu solid oven + spring baja + busa HR.
-4. **Instalasi bersih & garansi penuh** — teknisi in-house, pemeriksaan kelurusan & uji fungsi motorized; **garansi resmi rel & mekanisme 1–5 tahun** (kartu garansi tertulis); purnajual: dry-clean profesional & penggantian sparepart.
-
-### Estimasi waktu pengerjaan
-| Jenis | Estimasi |
-| :--- | :--- |
-| Gorden/blinds custom | 7–14 hari kerja |
-| French Pleat eksklusif | 10–14 hari kerja |
-| Blinds Venetian / Silhouette | 7–12 hari kerja |
-| Sofa custom / reupholstery / kulit | 14–21 hari kerja |
-| Rata-rata umum | 7–21 hari kerja |
-
----
-
-## 5. Garansi & Layanan Purnajual
-
-- **Garansi resmi 1–5 tahun** untuk rel, mekanisme, dan motor motorized (tertulis di kartu garansi).
-- **Dry-clean profesional** gorden berstandar hotel + perawatan kain berkala.
-- **Perawatan & pemindahan rel** saat renovasi; penggantian sparepart.
-- **After-sales responsif** — penjadwalan kunjungan servis jelas.
-- Kualitas kain lolos **uji abrasi Martindale** dan **tahan sinar UV tropis** (standar hotel bintang 5 & kedutaan).
-
----
-
-## 6. Produk (6 Kategori, 8 Produk Unggulan)
-
-| Kategori | Produk Unggulan | Catatan teknis singkat |
+| Lokasi | Alamat (placeholder) | Jam buka |
 | :--- | :--- | :--- |
-| **Gorden & Vitrase** | Gorden Ripple Fold & Vitrase Sheer Linen | Gelombang simetris; insulasi 70%; motorized-ready; est. 7–14 hari |
-| **Gorden & Vitrase** | Gorden French Pleat Klasik Eksklusif | Jahitan tangan; tinggi s.d. 6 m; long-lasting; est. 10–14 hari |
-| **Blinds** | Motorized Wooden Venetian Blinds | Slat 50 mm, 18 urat; lebar s.d. 6 m; est. 7–12 hari |
-| **Blinds** | Silhouette & Shangri-La Window Shades | Filter UV 88% tanpa silau; senyap; est. 7–12 hari |
-| **Kain Upholstery** | Bouclé & Chenille Textured | Martindale > 60.000 rubs; 40+ warna; nano stain-resistant |
-| **Kain Upholstery** | Kulit Italian Full Grain & Aniline | Dari Vicenza, Italia; patina abadi; est. 14–21 hari |
-| **Wallpaper** | Exclusive Silk & Textured Wallcovering | Seamless; fire-retardant Class A; akustik; bebas VOC |
-| **Furniture** | Bespoke Custom Curved Sofa & Credenza | Rangka solid oven; garansi rangka seumur hidup; est. 14–21 hari |
-| **Flooring** | Parquet Herringbone & Karpet Wool | European oak; NZ wool hand-tufted; underfloor heating safe |
+| Showroom Senopati (Jakarta Selatan) | Jl. Senopati No. 21A, Kramat Pela, Kebayoran Baru | Senin-Sabtu 09.00-18.00, Minggu dengan janji temu |
+| Studio Menteng (Jakarta Pusat) | Jl. HOS Cokroaminoto No. 12, Gondangdia, Menteng | Senin-Sabtu 09.00-17.30, Minggu tutup |
 
-> Seluruh produk **custom made** sesuai ukuran aktual ruang. Sistem rel bisa **manual atau motorized** (Somfy/Dooya). Untuk detail spesifikasi lengkap tiap produk, lihat halaman `/koleksi-produk/<id>` di website.
+Kunjungan ke dua-duanya bisa dijadwalkan lewat reservasi di website. Sekadar melihat-lihat tidak butuh janji khusus untuk datang.
 
----
+## Bagaimana WhatsApp bekerja
 
-## 7. Sejarah Singkat (Timeline)
+Semua tombol di website memakai satu nomor placeholder yang sama. Format pesan yang dibentuk sistem diawali konteks, misalnya "Halo Nusa Atelier, saya tertarik konsultasi interior..." atau "Saya ingin reservasi kunjungan...". Ada proteksi kecil: jeda 3 detik antar klik dan maksimal 5 kali buka WhatsApp per sesi pengunjung, biar tidak spam. Setelah itu pengunjung diarahkan ke pilihan telepon atau email. Kalau butuh detail teknis, ada di `src/lib/wa.ts`.
 
-| Tahun | Tonggak |
-| :--- | :--- |
-| 1992 | Atelier pertama dibuka di Pintu Air, Jakarta Pusat. |
-| 2000 | Era motorisasi gorden (rel motor listrik). |
-| 2008 | Showroom flagship Fatmawati dengan galeri 10.000+ sampel. |
-| 2018 | Mitra resmi Somfy & Dooya; divisi smart home & grosir regional. |
-| Hari ini | 1.800+ proyek; distribusi grosir hingga Singapura & Malaysia. |
+## Kesimpulan
 
----
-
-## 8. FAQ Jawaban Singkat (untuk panggilan/chat)
-
-| Pertanyaan pelanggan | Jawaban standar |
-| :--- | :--- |
-| Apakah survei berbayar? | **Gratis** untuk wilayah Jakarta, Tangerang, BSD, Depok, Bekasi — konsultan membawa contoh kain fisik. |
-| Berapa lama pengerjaan? | Gorden/blinds 7–14 hari; sofa/reupholstery 14–21 hari kerja setelah konfirmasi ukuran & bahan. |
-| Bisa proyek luar Jawa? | Ya — rutin ke Bali, Surabaya, Medan, Makassar, Bandung (survei khusus + instalasi teknisi). |
-| Bisa smart home / motorized? | Ya — authorized partner Somfy & Dooya; kontrol via remote, sakelar, aplikasi, Google Home, Apple HomeKit, Control4. |
-| Boleh bawa kain sendiri? | Ya — layanan CMT (cut, make & trim) untuk kain milik klien/desainer. |
-| Bagaimana garansinya? | Garansi resmi 1–5 tahun rel & mekanisme (tertulis) + purnajual dry-clean & suku cadang. |
-
----
-
-## 9. Segmen Pelanggan
-
-- **Residensial mewah / penthouse** — jendela void, motorized, privasi, insulasi, survei ke rumah.
-- **Arsitek (IAI) & desainer interior (HDII)** — sample book fisik, harga trade/project, garansi deadline.
-- **Komersial & hospitality** — hotel butik, restoran fine-dining, kedutaan, kantor — material heavy-duty.
-- **Wholesale/grosir tekstil** — distributor resmi ke toko & kontraktor se-Nusantara (Indonesia, Singapura, Malaysia).
-
----
-
-## 10. Alur Digital Website (untuk menjelaskan ke pelanggan)
-
-1. Pengunjung melihat katalog & filter kategori; bisa buka halaman detail tiap produk.
-2. **"Reservasi Kunjungan Showroom"** → pilih tanggal & jam, kirim via WhatsApp (pesan otomatis sudah terisi) → tim konfirmasi.
-3. **Tombol WhatsApp melayang** → konsultasi cepat (survei, katalog, harga, jam buka) dengan pesan otomatis.
-4. Tidak ada belanja/pembayaran online — seluruh transaksi lanjutan dilakukan offline via konsultan.
-
----
-
-## Catatan Sinkronisasi untuk Tim
-
-- Setiap perubahan konten di `src/content/*.ts` **wajib** diikuti pembaruan dokumen ini (terutama angka di tab 1, 2, 4, 5).
-- Verifikasi setelah edit: `npm run lint` dan `npm run build` di repo.
+Kontak dan lokasi di file ini belum resmi. Identitas dan produk sudah sesuai data live, jadi kalau mengubah produk, kategori, atau jam showroom, sumbernya `src/content/`, lalu file ini ikut diperbarui supaya cerita di depan pelanggan tidak beda-beda.

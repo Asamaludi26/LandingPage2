@@ -10,6 +10,7 @@ Seluruh dokumentasi proyek dipusatkan di folder **[`docs/`](./docs/README.md)**:
 - **[docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md)** — Arsitektur file & alur sistem.
 - **[docs/FAKTA-PELANGGAN.md](./docs/FAKTA-PELANGGAN.md)** — Fakta lengkap untuk komunikasi ke pelanggan (PM).
 - **[docs/PANDUAN-KONTEN.md](./docs/PANDUAN-KONTEN.md)** — Panduan edit konten (`src/content/`).
+- **[docs/PANDUAN-DEVELOPMENT.md](./docs/PANDUAN-DEVELOPMENT.md)** — Panduan development: alur kerja, deploy, troubleshooting.
 
 ## Quick Start
 

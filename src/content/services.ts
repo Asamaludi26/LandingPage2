@@ -231,6 +231,6 @@ export const SERVICES_PAGE = {
     title: 'Wujudkan Ruang Impian Anda',
     accent: 'Mulai dari Konsultasi & Survei Gratis',
     description:
-      'Reservasi kunjungan ke showroom kami di Fatmawati atau Pintu Air, atau hubungi konsultan kami via WhatsApp untuk diskusi awal tanpa komitmen.',
+      'Reservasi kunjungan ke showroom kami di Senopati atau Menteng, atau hubungi konsultan kami via WhatsApp untuk diskusi awal tanpa komitmen.',
   },
 };

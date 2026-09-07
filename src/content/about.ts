@@ -21,7 +21,7 @@ export const ABOUT_PAGE = {
     description:
       'Didirikan pada tahun 1992, Nusa Atelier bertransformasi dari sebuah workshop atelier gorden dan jok kursi menjadi salah satu destinasi terlengkap untuk kebutuhan soft-furnishing dan interior mewah di Indonesia.',
     image: '/assets/unsplash-1616046229478-9901c5536a45.jpg',
-    alt: 'Showroom Nusa Atelier Fatmawati',
+    alt: 'Showroom Nusa Atelier Senopati',
   },
   metrics: [
     { value: SITE_INFO.experienceYears, label: 'Tahun Pengalaman' },
@@ -36,7 +36,7 @@ export const ABOUT_PAGE = {
     title3: '& Kehangatan Desain',
     paragraphs: [
       'Bagi kami, gorden bukan sekadar penutup jendela dan sofa bukan sekadar tempat duduk. Keduanya adalah elemen sentuh utama yang mendefinisikan suasana, akustik, serta kehangatan sebuah rumah tinggal.',
-      'Sejak pembukaan gerai pertama kami di kawasan Pintu Air, Jakarta Pusat pada awal tahun 90-an hingga ekspansi showroom utama di Jalan RS Fatmawati, Jakarta Selatan, kami telah dipercaya oleh ribuan pemilik rumah tinggal, arsitek ternama, kedutaan besar, hingga jaringan hotel bintang lima di Indonesia.',
+      'Sejak pembukaan atelier pertama kami di kawasan Menteng, Jakarta Pusat pada awal tahun 90-an hingga ekspansi showroom utama di kawasan Senopati, Jakarta Selatan, kami telah dipercaya oleh ribuan pemilik rumah tinggal, arsitek ternama, kedutaan besar, hingga jaringan hotel bintang lima di Indonesia.',
       'Setiap potong kain yang kami pilih melalui uji ketahanan ketat—mulai dari tes abrasi Martindale hingga resistensi sinar ultraviolet tropis—memastikan hasil akhir tetap indah bertahan puluhan tahun tanpa memudar atau mudah rusak.',
     ],
     qualityCard: {
@@ -50,7 +50,7 @@ export const ABOUT_PAGE = {
     images: [
       {
         src: '/assets/unsplash-1616046229478-9901c5536a45.jpg',
-        alt: 'Showroom Nusa Atelier Fatmawati',
+        alt: 'Showroom Nusa Atelier Senopati',
       },
       {
         src: '/assets/unsplash-1586023492125-27b2c045efd7.jpg',
@@ -68,9 +68,9 @@ export const ABOUT_PAGE = {
     intro:
       'Setiap babak membawa kami lebih dalam ke dunia tekstil, motorisasi, dan pengerajinan tangan — tanpa pernah melepas karakter atelier kecil di awal perjalanan.',
     milestones: [
-      { year: '1992', title: 'Atelier Pertama di Pintu Air', desc: 'Berdiri dengan lima pengrajin ahli di kawasan sentra tekstil Jakarta Pusat.' },
+      { year: '1992', title: 'Atelier Pertama di Menteng', desc: 'Berdiri dengan lima pengrajin ahli di kawasan pusat Jakarta.' },
       { year: '2000', title: 'Era Motorisasi Gorden', desc: 'Memperkenalkan rel motor listrik dan gorden otomatis untuk residensial dan perkantoran.' },
-      { year: '2008', title: 'Showroom Flagship Fatmawati', desc: 'Galeri 10.000+ sampel kain dunia serta divisi furnitur dan upholstery custom.' },
+      { year: '2008', title: 'Showroom Flagship Senopati', desc: 'Galeri 10.000+ sampel kain dunia serta divisi furnitur dan upholstery custom.' },
       { year: '2018', title: 'Smart Home & Grosir Regional', desc: 'Mitra resmi Somfy (Prancis) dan Dooya; distribusi wholesale hingga Singapura.' },
       { year: 'Hari Ini', title: '1.800+ Proyek Dipercaya', desc: 'Melayani hunian mewah, hotel bintang lima, kedutaan besar, dan arsitek ternama.' },
     ],
